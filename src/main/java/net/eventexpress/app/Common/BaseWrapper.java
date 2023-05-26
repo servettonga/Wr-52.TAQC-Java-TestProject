@@ -1,7 +1,6 @@
 package net.eventexpress.app.Common;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +26,6 @@ public class BaseWrapper {
     private Configuration config;
     private String driverOption;
     private WebDriver driver;
-    private JavascriptExecutor js = (JavascriptExecutor) driver;
     private int timeout;
     private Actions action;
 
