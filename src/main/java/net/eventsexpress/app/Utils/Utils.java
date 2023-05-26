@@ -1,4 +1,4 @@
-package net.eventexpress.app.Utils;
+package net.eventsexpress.app.Utils;
 
 public class Utils {
 

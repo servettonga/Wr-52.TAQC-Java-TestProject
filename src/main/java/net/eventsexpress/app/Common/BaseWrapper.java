@@ -1,13 +1,10 @@
-package net.eventexpress.app.Common;
+package net.eventsexpress.app.Common;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -24,17 +21,22 @@ import java.util.List;
 public class BaseWrapper {
     private Configurations configs = new Configurations();
     private Configuration config;
-    private String driverOption;
     private WebDriver driver;
     private int timeout;
     private Actions action;
 
+    public BaseWrapper(WebDriver driverOption) {
+        loadConfig();
+        driver = driverOption;
+        driver.manage().window().maximize();
+        action = new Actions(driver);
+    }
 
     private void loadConfig() {
+        // Gather configuration for BaseWrapper
         try {
-            config = configs.properties(new File("src/main/java/net/eventexpress/app/Config/app.properties"));
+            config = configs.properties(new File("src/main/java/net/eventsexpress/app/Config/app.properties"));
             timeout = config.getInt("elementTimeOut");
-            driverOption = config.getString("driver");
         }
         catch (ConfigurationException cex) {
             System.out.println("Configuration file not found");
@@ -42,30 +44,14 @@ public class BaseWrapper {
         }
     }
 
-    public BaseWrapper() {
-        loadConfig();
-        switch (driverOption) {
-            case "chrome":
-                System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-                driver = new ChromeDriver();
-                break;
-            case "firefox":
-                System.setProperty("webdriver.edge.driver", "src/main/resources/geckodriver.exe");
-                driver = new FirefoxDriver();
-                break;
-            case "edge":
-                System.setProperty("webdriver.edge.driver", "src/main/resources/msedgedriver");
-                driver = new EdgeDriver();
-                break;
-            default:
-                throw new RuntimeException("Invalid driver");
-        }
-        driver.manage().window().maximize();
-        action = new Actions(driver);
+    public void quit() {
+        // Method for quit driver
+        driver.quit();
     }
 
-    public void quit() {
-        driver.quit();
+    public void close() {
+        // Method for close browser
+        driver.close();
     }
 
     public void goToSite() {
