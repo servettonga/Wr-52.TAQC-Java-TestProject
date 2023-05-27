@@ -1,4 +1,4 @@
-package net.eventsexpress.app;
+package net.eventsexpress.app.TestConfig;
 
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
@@ -19,11 +19,11 @@ public class TestSetUp {
     public static WebDriver getDriver() {
         // Get the default driver for BaseWrapper
         try {
-            config = configs.properties(new File("src/main/java/net/eventsexpress/app/Config/app.properties"));
+            config = configs.properties(new File("src/test/java/net/eventsexpress/app/TestConfig/test.properties"));
             driverOption = config.getString("driver");
         }
         catch (ConfigurationException cex) {
-            System.out.println("Configuration file not found");
+            System.out.println("Test configuration file not found");
             System.exit(1);
         }
         switch (driverOption) {

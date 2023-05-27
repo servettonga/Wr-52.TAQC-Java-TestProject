@@ -39,7 +39,7 @@ public class BaseWrapper {
             timeout = config.getInt("elementTimeOut");
         }
         catch (ConfigurationException cex) {
-            System.out.println("Configuration file not found");
+            System.out.println("App configuration file not found");
             System.exit(1);
         }
     }
