@@ -1,6 +1,7 @@
 package net.eventsexpress.app.Common;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -24,12 +25,14 @@ public class BaseWrapper {
     private WebDriver driver;
     private int timeout;
     private Actions action;
+    private JavascriptExecutor js;
 
     public BaseWrapper(WebDriver driverOption) {
         loadConfig();
         driver = driverOption;
         driver.manage().window().maximize();
         action = new Actions(driver);
+        js = (JavascriptExecutor)driver;
     }
 
     private void loadConfig() {
@@ -148,6 +151,34 @@ public class BaseWrapper {
         }
     }
 
+    public List<WebElement> findElementsById(String locator) {
+        // Method for search elements by id with wait
+        try {
+            List<WebElement> elements = new WebDriverWait(driver, Duration.ofSeconds(timeout)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.id(locator)));
+            return elements;
+        }
+        catch (TimeoutException e) {
+            throw new RuntimeException("Elements were not found during " + (timeout) + " seconds");
+        }
+        catch (NoSuchElementException e) {
+            throw new RuntimeException("Elements " + locator + " were not found");
+        }
+    }
+
+    public List<WebElement> findElementsByName(String locator) {
+        // Method for search elements by name with wait
+        try {
+            List<WebElement> elements = new WebDriverWait(driver, Duration.ofSeconds(timeout)).until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.name(locator)));
+            return elements;
+        }
+        catch (TimeoutException e) {
+            throw new RuntimeException("Elements were not found during " + (timeout) + " seconds");
+        }
+        catch (NoSuchElementException e) {
+            throw new RuntimeException("Elements " + locator + " were not found");
+        }
+    }
+
     public void scrollToElementCSS(String locator) {
         // Method for scroll to element
         WebElement elementToScrooll = findElementByCSS(locator);
@@ -164,4 +195,20 @@ public class BaseWrapper {
         // Method for get current url
         return driver.getCurrentUrl();
     }
+
+    public void waitUntilCSSElementIsVisible(String locator) {
+        // Method for wait until element is visible
+        new WebDriverWait(driver, Duration.ofSeconds(timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(locator)));
+    }
+
+    public void waitUntilXpathElementIsVisible(String locator) {
+        // Method for wait until element is visible
+        new WebDriverWait(driver, Duration.ofSeconds(timeout)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(locator)));
+    }
+
+    public void clickJS(WebElement webElement) {
+        // Method for click JS
+        js.executeScript("arguments[0].click();", webElement);
+    }
+
 }

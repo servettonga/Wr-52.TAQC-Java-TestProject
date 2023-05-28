@@ -1,5 +1,6 @@
 package net.eventsexpress.app.TestScripts;
 
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -8,9 +9,8 @@ import net.eventsexpress.app.Common.BasePage;
 import net.eventsexpress.app.Utils.Utils;
 import net.eventsexpress.app.TestConfig.TestSetUp;
 
-public class LandingPageTest {
+public class LandingPageTest extends TestSetUp{
     // Sample test class
-    BasePage base;
 
     @BeforeMethod
     public void setUp() {
@@ -18,17 +18,11 @@ public class LandingPageTest {
     }
 
      @Test
-    public void scrollTest() {
+    public void loginTest() {
         base.goToSite();
-        base.footer.scrollToFooter();
+        base.landingPage.login(EMAIL, PASSWORD);
         Utils.sleep(1000);
-    }
-
-    @Test
-    public void eventExpressButton() {
-        base.goToSite();
-        base.header.eventExpressButton();
-        Utils.sleep(1000);
+        Assert.assertTrue(base.header.isUserLoggedIn());
     }
 
     @AfterMethod

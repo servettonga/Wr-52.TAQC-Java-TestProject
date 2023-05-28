@@ -14,11 +14,12 @@ public class Footer extends BaseWrapper{
     String INSTAGRAM_LINK_XPATH = "//i[contains(@class,'instagram')]/parent::*/@href";
     String YOUTUBE_LINK_XPATH = "//i[contains(@class,'youtube')]/parent::*/@href";
 
+    public Footer(WebDriver driver) {
+        super(driver);
+    }
+
     public void scrollToFooter() {
         scrollToElementXpath(FOOTER_XPATH);
     }
 
-    public Footer(WebDriver driver) {
-        super(driver);
-    }
 }
