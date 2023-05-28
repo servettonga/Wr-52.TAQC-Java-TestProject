@@ -1,5 +1,8 @@
 package net.eventsexpress.app.Pages;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.openqa.selenium.WebDriver;
 
 import net.eventsexpress.app.Common.BaseWrapper;
@@ -45,6 +48,16 @@ public class Landing extends BaseWrapper{
         findElementByXpath(REPASSWORD_INP_XPATH).sendKeys(password);
         findElementByXpath(SIGN_IN_UP_BTN_XPATH).click();
         return findElementByCSS(SUCCESS_PAGE_ALERT_TEXT_CSS).getText();
+    }
+
+    public String getBackgroundImage() {
+        Pattern pattern = Pattern.compile("\\/([^\\/]+\\.jpg)");
+        String input = findElementByCSS(BACKGROUND_IMAGE_CSS).getAttribute("style");
+        Matcher matcher = pattern.matcher(input);
+        if (matcher.find()) {
+            return matcher.group(1);
+        }
+        return null;
     }
 
 }
