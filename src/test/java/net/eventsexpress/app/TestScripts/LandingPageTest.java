@@ -6,7 +6,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import net.eventsexpress.app.Common.BasePage;
-import net.eventsexpress.app.Utils.Utils;
 import net.eventsexpress.app.TestConfig.TestSetUp;
 
 public class LandingPageTest extends TestSetUp{
@@ -14,19 +13,28 @@ public class LandingPageTest extends TestSetUp{
 
     @BeforeMethod
     public void setUp() {
-        base = new BasePage(TestSetUp.getDriver());
+        base = new BasePage(getDriver());
     }
 
      @Test
     public void loginTest() {
         base.goToSite();
-        base.landingPage.login(EMAIL, PASSWORD);
-        Utils.sleep(1000);
+        base.landing.login(EMAIL, PASSWORD);
+        sleep(1000);
         Assert.assertTrue(base.header.isUserLoggedIn());
+    }
+
+    @Test
+    public void registerTest() {
+        String expected = "Your register was successfull. Please confirm your email.";
+        base.goToSite();
+        Assert.assertEquals(base.landing.register(NEW_EMAIL, NEW_PASSWORD), expected);
+        sleep(1000);
     }
 
     @AfterMethod
     public void tearDown() {
         base.quit();
     }
+
 }

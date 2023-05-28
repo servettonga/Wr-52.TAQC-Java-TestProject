@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 
 import net.eventsexpress.app.Common.BaseWrapper;
 
-public class LandingPage extends BaseWrapper{
+public class Landing extends BaseWrapper{
     // Hero
     String CREATE_EVENT_BTN_XPATH = "//button[contains(text(), 'Create event')]";
     String FIND_EVENT_BTN_XPATH = "//a[text()='Find event']";
@@ -17,8 +17,8 @@ public class LandingPage extends BaseWrapper{
     // Login Modal
     String SIGN_IN_UP_BTN_CSS = "#headbtn";
     String MODAL_DIALOG_XPATH = "//div[@class='MuiDialog-root'][2]";
-    String LOGIN_TAB_XPATH = "(//button[./span[text()='Login']])[1]";
-    String REGISTER_TAB_XPATH = "(//span[text()='Register'])[1]";
+    String LOGIN_TAB_XPATH = "(//button[@role='tab']//span[text()='Login'])[2]";
+    String REGISTER_TAB_XPATH = "(//button[@role='tab']//span[text()='Register'])[2]";
     String EMAIL_INP_XPATH = MODAL_DIALOG_XPATH + "//input[@name='email']";
     String PASSWORD_INP_XPATH = MODAL_DIALOG_XPATH + "//input[@name='password']";
     String REPASSWORD_INP_XPATH = MODAL_DIALOG_XPATH + "//input[@name='RepeatPassword']";
@@ -26,7 +26,7 @@ public class LandingPage extends BaseWrapper{
     String SUCCESS_PAGE_ALERT_TEXT_CSS = "div.alert-success";
     String UNSUCCESS_PAGE_ALERT_TEXT_XPATH = "//input[@name='password']/parent::*/following-sibling::p[contains(@class, 'Mui-error')]";
 
-    public LandingPage(WebDriver driver) {
+    public Landing(WebDriver driver) {
         super(driver);
     }
 
@@ -35,6 +35,16 @@ public class LandingPage extends BaseWrapper{
         findElementByXpath(EMAIL_INP_XPATH).sendKeys(email);
         findElementByXpath(PASSWORD_INP_XPATH).sendKeys(password);
         findElementByXpath(SIGN_IN_UP_BTN_XPATH).click();
+    }
+
+    public String register(String email, String password) {
+        findElementByCSS(SIGN_IN_UP_BTN_CSS).click();
+        findElementByXpath(REGISTER_TAB_XPATH).click();
+        findElementByXpath(EMAIL_INP_XPATH).sendKeys(email);
+        findElementByXpath(PASSWORD_INP_XPATH).sendKeys(password);
+        findElementByXpath(REPASSWORD_INP_XPATH).sendKeys(password);
+        findElementByXpath(SIGN_IN_UP_BTN_XPATH).click();
+        return findElementByCSS(SUCCESS_PAGE_ALERT_TEXT_CSS).getText();
     }
 
 }
