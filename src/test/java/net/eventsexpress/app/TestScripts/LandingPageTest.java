@@ -17,11 +17,20 @@ public class LandingPageTest extends TestSetUp{
     }
 
      @Test
-    public void loginTest() {
+    public void validLoginTest() {
         base.goToSite();
         base.landing.login(EMAIL, PASSWORD);
         sleep(1000);
         Assert.assertTrue(base.header.isUserLoggedIn());
+    }
+
+
+    @Test
+    public void invalidLoginTest() {
+        base.goToSite();
+        Assert.assertEquals(base.landing.login(NEW_EMAIL, NEW_PASSWORD),  "Incorrect login or password");
+        sleep(1000);
+        Assert.assertFalse(base.header.isUserLoggedIn());
     }
 
     @Test

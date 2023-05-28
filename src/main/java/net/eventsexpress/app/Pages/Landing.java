@@ -28,16 +28,23 @@ public class Landing extends BaseWrapper{
     String SIGN_IN_UP_BTN_XPATH = "(//div[@class='MuiDialog-root'][2]//span[@class='MuiButton-label'])[2]";
     String SUCCESS_PAGE_ALERT_TEXT_CSS = "div.alert-success";
     String UNSUCCESS_PAGE_ALERT_TEXT_XPATH = "//input[@name='password']/parent::*/following-sibling::p[contains(@class, 'Mui-error')]";
+    String INCORRECT_PASSWORD_XPATH = "(//div[contains(@class, 'text-danger')])[1]";
 
     public Landing(WebDriver driver) {
         super(driver);
     }
 
-    public void login(String email, String password) {
+    public String login(String email, String password) {
         findElementByCSS(SIGN_IN_UP_BTN_CSS).click();
         findElementByXpath(EMAIL_INP_XPATH).sendKeys(email);
         findElementByXpath(PASSWORD_INP_XPATH).sendKeys(password);
         findElementByXpath(SIGN_IN_UP_BTN_XPATH).click();
+        try {
+            return findElementByXpath(INCORRECT_PASSWORD_XPATH).getText();
+        }
+        catch (RuntimeException ex) {
+            return "Logged in successfully.";
+        }
     }
 
     public String register(String email, String password) {

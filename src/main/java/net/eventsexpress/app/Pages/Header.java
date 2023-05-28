@@ -27,7 +27,13 @@ public class Header extends BaseWrapper{
     }
 
     public boolean isUserLoggedIn() {
-        return findElementByXpath(USER_AVATAR_XPATH).isDisplayed();
+        try {
+            findElementByXpath(USER_AVATAR_XPATH);
+            return true;
+        }
+        catch (RuntimeException ex) {
+            return false;
+        }
     }
 
     public void clickDropdownMenu() {
