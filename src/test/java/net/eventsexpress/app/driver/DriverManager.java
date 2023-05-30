@@ -15,7 +15,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import net.eventsexpress.app.config.ConfigurationManager;
 import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.safari.SafariOptions;
 
 public class DriverManager {
     private static WebDriver driver;
