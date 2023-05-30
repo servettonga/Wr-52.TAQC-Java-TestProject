@@ -9,20 +9,12 @@ import net.eventsexpress.app.driver.DriverManager;
 import net.eventsexpress.app.utils.Utils;
 
 public class TestSetUp {
-    public Dotenv dotenv;
-    public String EMAIL;
-    public String PASSWORD;
-    public String NEW_EMAIL;
-    public String NEW_PASSWORD;
-    public String baseURL = ConfigurationManager.getConfig().getString("baseURL");
-
-    public TestSetUp() {
-        dotenv = Dotenv.load();
-        EMAIL = dotenv.get("EMAIL");
-        PASSWORD = dotenv.get("PASSWORD");
-        NEW_EMAIL = Utils.randomUser().get(0);
-        NEW_PASSWORD = Utils.randomUser().get(1);
-    }
+    public static final Dotenv dotenv = Dotenv.load();
+    public static final String EMAIL = dotenv.get("EMAIL");
+    public static final String PASSWORD = dotenv.get("PASSWORD");
+    public static final String NEW_EMAIL = Utils.randomUser().get(0);
+    public static final String NEW_PASSWORD = Utils.randomUser().get(1);
+    public static final String baseURL = ConfigurationManager.getConfig().getString("baseURL");
 
     @BeforeMethod
     public void beforeMethod() {
