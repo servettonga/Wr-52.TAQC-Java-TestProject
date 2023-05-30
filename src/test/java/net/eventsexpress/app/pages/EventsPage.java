@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import net.eventsexpress.app.base.Base;
 
 public class EventsPage {
-    String ADMIN_MENU_CSS = "#sub-nav";
-    String NAV_PAGE_TITLE_CSS = "span.nav-item-text";
+    protected static String ADMIN_MENU_CSS = "#sub-nav";
+    protected static String NAV_PAGE_TITLE_CSS = "span.nav-item-text";
 
     public void admingPanel(String pageName) {
         /*

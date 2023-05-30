@@ -8,12 +8,12 @@ import org.openqa.selenium.WebElement;
 import net.eventsexpress.app.base.Base;
 
 public class EventDetailsPage {
-    String EVENT_PHOTO_XPATH = "//img[contains(@id,'eventFullPhoto')]";
-    String EVENT_NAME_XPATH = "//span[@class='title']";
-    String EVENT_DATE_XPATH = "//time/..";
-    String EVENT_LOCATION_XPATH = "//div[@class='text-block']//div";
-    String EVENT_DESCRIPTION_XPATH = "//div[contains(@class, 'text-box-big')]";
-    String JOIN_BUTTON_XPATH = "//button[contains(@class, 'join-leave')]";
+    protected static String EVENT_PHOTO_XPATH = "//img[contains(@id,'eventFullPhoto')]";
+    protected static String EVENT_NAME_XPATH = "//span[@class='title']";
+    protected static String EVENT_DATE_XPATH = "//time/..";
+    protected static String EVENT_LOCATION_XPATH = "//div[@class='text-block']//div";
+    protected static String EVENT_DESCRIPTION_XPATH = "//div[contains(@class, 'text-box-big')]";
+    protected static String JOIN_BUTTON_XPATH = "//button[contains(@class, 'join-leave')]";
 
     public String getEventName() {
         return Base.findElementByXpath(EVENT_NAME_XPATH).getText();
