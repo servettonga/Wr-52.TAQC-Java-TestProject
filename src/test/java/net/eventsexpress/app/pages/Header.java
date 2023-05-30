@@ -1,7 +1,6 @@
 package net.eventsexpress.app.pages;
 
 import net.eventsexpress.app.base.Base;
-import net.eventsexpress.app.utils.Utils;
 
 public class Header {
     protected static String EVENT_EXPRESS_LOGO_CSS = "#EEButton";

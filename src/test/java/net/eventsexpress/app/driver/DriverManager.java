@@ -1,6 +1,5 @@
 package net.eventsexpress.app.driver;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 import org.openqa.selenium.TimeoutException;
