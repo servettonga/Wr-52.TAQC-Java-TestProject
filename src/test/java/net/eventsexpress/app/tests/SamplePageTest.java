@@ -3,7 +3,6 @@ package net.eventsexpress.app.tests;
 import org.testng.annotations.Test;
 
 import net.eventsexpress.app.pages.Header;
-import net.eventsexpress.app.utils.Utils;
 
 public class SamplePageTest extends TestSetUp {
     // Sample test class
@@ -12,14 +11,12 @@ public class SamplePageTest extends TestSetUp {
     public void validLoginTest() {
         Header.login(EMAIL, PASSWORD);
         Header.assertUserLoggedIn();
-        Utils.sleep(1000);
     }
 
     @Test(priority = 2)
     public void invalidLoginTest() {
         Header.login(NEW_EMAIL, NEW_PASSWORD);
-        Header.assertUserNotLoggedIn();
-        Utils.sleep(1000);
+        Header.assertIncorrectLogin();
     }
 
     @Test(priority = 3)
@@ -27,7 +24,6 @@ public class SamplePageTest extends TestSetUp {
         String expected = "Your register was successfull. Please confirm your email.";
         Header.register(NEW_EMAIL, NEW_PASSWORD);
         Header.assertRegistrationSuccess(expected);
-        Utils.sleep(1000);
     }
 
 }

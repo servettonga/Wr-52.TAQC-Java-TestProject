@@ -1,5 +1,6 @@
 package net.eventsexpress.app.driver;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import org.openqa.selenium.TimeoutException;
@@ -42,7 +43,7 @@ public class DriverManager {
             case "edge":
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions edgeOptions = new EdgeOptions();
-                // edgeOptions.addArguments("-inprivate");
+                edgeOptions.addArguments("-inprivate");
                 edgeOptions.addArguments("start-maximized");
                 return new EdgeDriver(edgeOptions);
             case "safari":
@@ -55,23 +56,10 @@ public class DriverManager {
 
     public static void quit() {
         // Method for quit driver
-        driver.quit();
-        driver = null;
-    }
-
-    public static void close() {
-        // Method for closing all tabs and open a new one
-        String current = driver.getWindowHandle();
-        Set<String> tabs = driver.getWindowHandles();
-        driver.switchTo().newWindow(WindowType.WINDOW);
-        for (String tab : tabs) {
-            if (!tab.equals(current)) {
-                driver.switchTo().window(tab);
-                driver.close();
-            }
+        if (driver != null) {
+            driver.quit();
+            driver = null;
         }
-        driver.manage().deleteAllCookies();
-        driver.switchTo().window(current);
     }
 
     public static String getCurrentUrl() {
@@ -82,6 +70,10 @@ public class DriverManager {
     public static void goToSite(String URL) {
         // Method for open site
         try {
+            Set<String> tabs = driver.getWindowHandles();
+            if (tabs.size() == 0) {
+                driver.switchTo().newWindow(WindowType.TAB);
+            }
             driver.get(URL);
         } catch (TimeoutException e) {
             throw new RuntimeException("Site downloading failed, timeout");

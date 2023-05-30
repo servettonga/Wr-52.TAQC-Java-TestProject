@@ -3,7 +3,7 @@
 <suite name="AllTests" verbose="1">
     <test name="LandingPageTest">
         <classes>
-            <class name="net.eventsexpress.app.LandingPageTest"></class>
+            <class name="net.eventsexpress.app.tests.SamplePageTest"></class>
         </classes>
     </test>
 </suite>

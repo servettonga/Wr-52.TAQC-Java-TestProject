@@ -1,22 +1,20 @@
 package net.eventsexpress.app.tests;
 
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
 
 import io.github.cdimascio.dotenv.Dotenv;
-import net.eventsexpress.app.base.Base;
 import net.eventsexpress.app.config.ConfigurationManager;
 import net.eventsexpress.app.driver.DriverManager;
 import net.eventsexpress.app.utils.Utils;
 
 public class TestSetUp {
-    public Base base;
     public Dotenv dotenv;
     public String EMAIL;
     public String PASSWORD;
     public String NEW_EMAIL;
     public String NEW_PASSWORD;
+    public String baseURL = ConfigurationManager.getConfig().getString("baseURL");
 
     public TestSetUp() {
         dotenv = Dotenv.load();
@@ -27,18 +25,13 @@ public class TestSetUp {
     }
 
     @BeforeMethod
-    public void setUp() {
+    public void beforeMethod() {
         DriverManager.getDriver();
-        DriverManager.goToSite(ConfigurationManager.getConfig().getString("baseURL"));
+        DriverManager.goToSite(baseURL);
     }
 
     @AfterMethod
     public void afterMethod() {
-        DriverManager.close();
-    }
-
-    @AfterTest
-    public void tearDown() {
         DriverManager.quit();
     }
 
