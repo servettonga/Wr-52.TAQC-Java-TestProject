@@ -9,21 +9,24 @@ public class SamplePageTest extends BaseTest {
 
     @Test(priority = 1)
     public void validLoginTest() {
-        Header.login(EMAIL, PASSWORD);
-        Header.assertUserLoggedIn();
+        new Header()
+                .login(EMAIL, PASSWORD)
+                .assertUserLoggedIn();
     }
 
     @Test(priority = 2)
     public void invalidLoginTest() {
-        Header.login(NEW_EMAIL, NEW_PASSWORD);
-        Header.assertIncorrectLogin();
+        new Header()
+                .login(NEW_EMAIL, NEW_PASSWORD)
+                .assertIncorrectLogin();
     }
 
     @Test(priority = 3)
     public void registerTest() {
         String expected = "Your register was successfull. Please confirm your email.";
-        Header.register(NEW_EMAIL, NEW_PASSWORD);
-        Header.assertRegistrationSuccess(expected);
+        new Header()
+                .register(NEW_EMAIL, NEW_PASSWORD)
+                .assertRegistrationSuccess(expected);
     }
 
 }
