@@ -1,12 +1,23 @@
 package net.eventsexpress.app.pages.footerpages;
 
-import net.eventsexpress.app.base.Base;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import net.eventsexpress.app.driver.DriverManager;
 
 public class PrivacyPage {
-    protected static String PRIVACY_HEADING_CSS = ".privacy h1";
+    protected static final String PRIVACY_HEADING_CSS = ".privacy h1";
+
+    @FindBy(css = PRIVACY_HEADING_CSS)
+    private WebElement privacyHeading;
+
+    public PrivacyPage() {
+        PageFactory.initElements(DriverManager.getDriver(), this);
+    }
 
     public String getPrivacyHeading() {
-        return Base.findElementByCSS(PRIVACY_HEADING_CSS).getText();
+        return privacyHeading.getText();
     }
 
 }

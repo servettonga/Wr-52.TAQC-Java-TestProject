@@ -1,19 +1,31 @@
 package net.eventsexpress.app.pages;
 
-import net.eventsexpress.app.base.Base;
+import net.eventsexpress.app.driver.DriverManager;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class Footer {
-    protected static String FOOTER_XPATH = "//div[@class='links-to-pages']";
-    protected static String PRIVACY_LINK_XPATH = "//div[@class='links-to-pages']//a[@href='/privacy']";
-    protected static String TERMS_LINK_XPATH = "//div[@class='links-to-pages']//a[@href='/terms']";
-    protected static String ABOUT_LINK_XPATH = "//div[@class='links-to-pages']//a[@href='/about']";
-    protected static String CONTACT_LINK_XPATH = "//div[@class='links-to-pages']//a[@href='/contactAdmin']";
-    protected static String FACEBOOK_LINK_XPATH = "//i[contains(@class,'facebook')]/parent::*/@href";
-    protected static String INSTAGRAM_LINK_XPATH = "//i[contains(@class,'instagram')]/parent::*/@href";
-    protected static String YOUTUBE_LINK_XPATH = "//i[contains(@class,'youtube')]/parent::*/@href";
+    protected static final String FOOTER_XPATH = "//div[@class='links-to-pages']";
+    protected static final String PRIVACY_LINK_XPATH = "//div[@class='links-to-pages']//a[@href='/privacy']";
+    protected static final String TERMS_LINK_XPATH = "//div[@class='links-to-pages']//a[@href='/terms']";
+    protected static final String ABOUT_LINK_XPATH = "//div[@class='links-to-pages']//a[@href='/about']";
+    protected static final String CONTACT_LINK_XPATH = "//div[@class='links-to-pages']//a[@href='/contactAdmin']";
+    protected static final String FACEBOOK_LINK_XPATH = "//i[contains(@class,'facebook')]/parent::*/@href";
+    protected static final String INSTAGRAM_LINK_XPATH = "//i[contains(@class,'instagram')]/parent::*/@href";
+    protected static final String YOUTUBE_LINK_XPATH = "//i[contains(@class,'youtube')]/parent::*/@href";
 
-    public void scrollToFooter() {
-        Base.scrollToElementXpath(FOOTER_XPATH);
+    @FindBy(xpath = PRIVACY_LINK_XPATH)
+    private WebElement privacyPageLink;
+
+    public Footer() {
+        PageFactory.initElements(DriverManager.getDriver(), this);
+    }
+
+    public Footer navigateToPrivacyPage() {
+        privacyPageLink.click();
+        return this;
     }
 
 }
