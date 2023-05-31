@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import net.eventsexpress.app.pages.Header;
 
-public class SamplePageTest extends TestSetUp {
+public class SamplePageTest extends BaseTest {
     // Sample test class
 
     @Test(priority = 1)

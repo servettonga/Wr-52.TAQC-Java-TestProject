@@ -18,7 +18,7 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class DriverManager {
     private static WebDriver driver;
-    private static String driverOption = ConfigurationManager.getConfig().getString("driver");
+    private static String driverOption = ConfigurationManager.getConfig().getString("DRIVER");
 
     public static WebDriver getDriver() {
         return driver == null ? driver = createDriver() : driver;

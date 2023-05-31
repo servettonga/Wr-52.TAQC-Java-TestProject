@@ -16,7 +16,7 @@ import java.time.Duration;
 import java.util.List;
 
 public class Base {
-    protected static int timeout = ConfigurationManager.getConfig().getInt("elementTimeOut");
+    protected static int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
     protected static Actions action = new Actions(DriverManager.getDriver());
     protected static JavascriptExecutor js = (JavascriptExecutor) DriverManager.getDriver();
 
