@@ -28,4 +28,7 @@ public class Footer {
         return this;
     }
 
+    public void click_privacy_link(){Base.findElementByXpath(PRIVACY_LINK_XPATH).click();}
+
 }
+

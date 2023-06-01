@@ -19,5 +19,9 @@ public class PrivacyPage {
     public String getPrivacyHeading() {
         return privacyHeading.getText();
     }
+    public static void assertPrivacyHeadingIsDisplayed() {
+        assert Base.findElementByCSS(PRIVACY_HEADING_CSS).isDisplayed()
+                : "Privacy Heading is not displayed";
+    }
 
 }
