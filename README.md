@@ -15,10 +15,9 @@ We are using simpliest github flow to organize our work:
 
 ### Note! Contribution rules:
 
-1. All Pull Requests should start from prefix #xxx-yyy where xxx - task number and and yyy - short description e.g. #020-CreateAdminPanel
-2. Pull request should not contain any files that is not required by task.
-   In case of any violations, pull request will be rejected.
+1. All Pull Requests should start from prefix #xxx-yyy where xxx - task number and and yyy - short description e.g. #020-CreateAdminPanel.
+2. Pull request should not contain any files that are not required by the task. In case of any violations, the pull request will be rejected.
+3. Create a .env file at the project’s root directory for credentials, add the following fields for administrator privileges:<br>
+   `EMAIL="anyvalidemail@email.com"`<br>`PASSWORD="validpassword"`
 
-Please refer to test.properties file for test configurations.
-
-Use only .env file at the project's root directory for credentials.
+4. Please refer to test.properties file in the resources folder for configurations.
