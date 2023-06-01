@@ -1,13 +1,19 @@
 package net.eventsexpress.app.pages;
 
+import java.time.Duration;
+
+import net.eventsexpress.app.config.ConfigurationManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import net.eventsexpress.app.driver.DriverManager;
-import net.eventsexpress.app.utils.Utils;
 
 public class Header {
+    private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
+    private final WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
     protected static final String EVENT_EXPRESS_LOGO_CSS = "#EEButton";
     protected static final String LOG_OUT_XPATH = "//button[contains(text(), 'log out')]";
     protected static final String USERNAME_XPATH = "//p[@id='userNameAlign']";
@@ -73,6 +79,26 @@ public class Header {
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         signInUp.click();
+        assertUserLoggedIn();
+        return this;
+    }
+
+    public Header assertUserLoggedIn() {
+        assert wait.until(ExpectedConditions.visibilityOf(userAvatar)).isDisplayed() : "User is not logged in";
+        return this;
+    }
+
+    public Header assertIncorrectLogin(String message) {
+        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(incorretPasswordMessage));
+        assert errorMessage.isDisplayed() : "Incorrect login message is not displayed";
+        assert errorMessage.getText().contains(message) : "Error message is not correct";
+        return this;
+    }
+
+    public Header logOut() {
+        assertUserLoggedIn();
+        username.click();
+        logOut.click();
         return this;
     }
 
@@ -87,43 +113,14 @@ public class Header {
     }
 
     public Header assertRegistrationSuccess(String message) {
-        Utils.sleep(500);
-        assert successMessage.getText().contains(message)
-                : "Registration is not successful";
-        return this;
-    }
-
-    public Header logOut() {
-        if (isUserLoggedIn()) {
-            username.click();
-            logOut.click();
-        }
-        return this;
-    }
-
-    private boolean isUserLoggedIn() {
-        try {
-            userAvatar.isDisplayed();
-            return true;
-        } catch (RuntimeException ex) {
-            return false;
-        }
-    }
-
-    public Header assertUserLoggedIn() {
-        assert isUserLoggedIn() : "User is not logged in";
-        return this;
-    }
-
-    public Header assertIncorrectLogin() {
-        Utils.sleep(500);
-        assert incorretPasswordMessage.getText().contains("Incorrect login or password")
-                : "Incorrect login message is not displayed";
+        WebElement currentMessage = wait.until(ExpectedConditions.visibilityOf(successMessage));
+        assert currentMessage.isDisplayed() : "Success message is not displayed";
+        assert currentMessage.getText().contains(message) : "Success message is not correct";
         return this;
     }
 
     public Header assertDropdownMenuDisplayed() {
-        assert dropdownMenu.getAttribute("class").contains("show");
+        assert dropdownMenu.getAttribute("class").contains("show") : "Dropdown menu is not displayed";
         return this;
     }
 }
