@@ -4,29 +4,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-import net.eventsexpress.app.base.Base;
+import net.eventsexpress.app.driver.DriverManager;
 
 public class EventDetailsPage {
-    protected static String EVENT_PHOTO_XPATH = "//img[contains(@id,'eventFullPhoto')]";
-    protected static String EVENT_NAME_XPATH = "//span[@class='title']";
-    protected static String EVENT_DATE_XPATH = "//time/..";
-    protected static String EVENT_LOCATION_XPATH = "//div[@class='text-block']//div";
-    protected static String EVENT_DESCRIPTION_XPATH = "//div[contains(@class, 'text-box-big')]";
-    protected static String JOIN_BUTTON_XPATH = "//button[contains(@class, 'join-leave')]";
+    protected static final String EVENT_PHOTO_XPATH = "//img[contains(@id,'eventFullPhoto')]";
+    protected static final String EVENT_NAME_XPATH = "//span[@class='title']";
+    protected static final String EVENT_DATE_XPATH = "//time/..";
+    protected static final String EVENT_LOCATION_XPATH = "//div[@class='text-block']//div";
+    protected static final String EVENT_DESCRIPTION_XPATH = "//div[contains(@class, 'text-box-big')]";
+    protected static final String JOIN_BUTTON_XPATH = "//button[contains(@class, 'join-leave')]";
+
+    @FindBy(xpath = EVENT_NAME_XPATH)
+    private WebElement eventName;
+
+    @FindBy(xpath = EVENT_DATE_XPATH)
+    private WebElement eventDate;
+
+    @FindBy(xpath = EVENT_LOCATION_XPATH)
+    private List<WebElement> eventLocation;
+
+    @FindBy(xpath = EVENT_DESCRIPTION_XPATH)
+    private WebElement eventDescription;
+
+    public EventDetailsPage() {
+        PageFactory.initElements(DriverManager.getDriver(), this);
+    }
 
     public String getEventName() {
-        return Base.findElementByXpath(EVENT_NAME_XPATH).getText();
+        return eventName.getText();
     }
 
     public String getEventDate() {
-        return Base.findElementByXpath(EVENT_DATE_XPATH).getText();
+        return eventDate.getText();
     }
 
     public String getEventLocation() {
-        List<WebElement> elements = Base.findElementsByXpath(EVENT_LOCATION_XPATH);
         List<String> locations = new ArrayList<>();
-        for (WebElement element : elements) {
+        for (WebElement element : eventLocation) {
             if (!element.getText().isEmpty()) {
                 locations.add(element.getText());
             }
@@ -35,11 +52,7 @@ public class EventDetailsPage {
     }
 
     public String getEventDescription() {
-        return Base.findElementByXpath(EVENT_DESCRIPTION_XPATH).getText();
-    }
-
-    public void clickJoinButton() {
-        Base.findElementByXpath(JOIN_BUTTON_XPATH).click();
+        return eventDescription.getText();
     }
 
 }
