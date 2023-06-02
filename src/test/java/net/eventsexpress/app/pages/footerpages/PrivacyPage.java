@@ -1,16 +1,14 @@
 package net.eventsexpress.app.pages.footerpages;
+import java.time.Duration;
 
 import net.eventsexpress.app.config.ConfigurationManager;
+import net.eventsexpress.app.driver.DriverManager;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
-
-import net.eventsexpress.app.driver.DriverManager;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
 
 public class PrivacyPage {
     private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");

@@ -14,11 +14,3 @@ public class PrivacyPageTest extends BaseTest {
     }
 
 }
-
-
-
-
-
-
-
-
