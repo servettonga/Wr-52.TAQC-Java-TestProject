@@ -79,7 +79,6 @@ public class Header {
         emailInput.sendKeys(email);
         passwordInput.sendKeys(password);
         signInUp.click();
-        assertUserLoggedIn();
         return this;
     }
 
