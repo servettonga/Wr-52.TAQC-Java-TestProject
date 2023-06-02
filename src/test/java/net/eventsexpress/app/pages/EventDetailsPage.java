@@ -24,7 +24,7 @@ public class EventDetailsPage {
     private WebElement eventDate;
 
     @FindBy(xpath = EVENT_LOCATION_XPATH)
-    private List<WebElement> evetLocation;
+    private List<WebElement> eventLocation;
 
     @FindBy(xpath = EVENT_DESCRIPTION_XPATH)
     private WebElement eventDescription;
@@ -43,7 +43,7 @@ public class EventDetailsPage {
 
     public String getEventLocation() {
         List<String> locations = new ArrayList<>();
-        for (WebElement element : evetLocation) {
+        for (WebElement element : eventLocation) {
             if (!element.getText().isEmpty()) {
                 locations.add(element.getText());
             }

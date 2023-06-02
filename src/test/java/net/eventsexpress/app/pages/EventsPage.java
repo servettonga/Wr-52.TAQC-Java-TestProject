@@ -21,7 +21,7 @@ public class EventsPage {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
 
-    public EventsPage admingPanel(String pageName) {
+    public EventsPage adminPanel(String pageName) {
         /*
          * Method for click on page depending on page_title value.
          * Pages of Admin Panel:
