@@ -1,15 +1,14 @@
 package net.eventsexpress.app.pages;
 
 import java.time.Duration;
-
 import net.eventsexpress.app.config.ConfigurationManager;
+import net.eventsexpress.app.driver.DriverManager;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import net.eventsexpress.app.driver.DriverManager;
 
 public class Header {
     private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
@@ -83,7 +82,13 @@ public class Header {
     }
 
     public Header assertUserLoggedIn() {
-        assert wait.until(ExpectedConditions.visibilityOf(userAvatar)).isDisplayed() : "User is not logged in";
+        boolean avatarExists = true;
+        try {
+            wait.until(ExpectedConditions.visibilityOf(userAvatar)).isDisplayed();
+        } catch (TimeoutException e) {
+            avatarExists = false;
+        }
+        assert avatarExists : "User is not logged in";
         return this;
     }
 
