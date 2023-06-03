@@ -2,6 +2,7 @@ package net.eventsexpress.app.pages.footerpages;
 
 import io.qameta.allure.Step;
 import java.time.Duration;
+
 import net.eventsexpress.app.config.ConfigurationManager;
 import net.eventsexpress.app.driver.DriverManager;
 import org.openqa.selenium.WebElement;
@@ -10,11 +11,9 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 public class AboutPage {
     private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
-    private final WebDriverWait wait =
-            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
+    private final WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
     protected static final String ABOUT_PAGE_HEADING_CSS = ".about h1";
 
     public AboutPage() {
