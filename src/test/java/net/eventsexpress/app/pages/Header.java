@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import io.qameta.allure.Step;
 
 public class Header {
     private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
@@ -73,6 +74,7 @@ public class Header {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
 
+    @Step("Click on Sign In/Up button and login")
     public Header login(String email, String password) {
         signInUpButton.click();
         emailInput.sendKeys(email);
@@ -81,6 +83,7 @@ public class Header {
         return this;
     }
 
+    @Step("Assert user is logged in")
     public Header assertUserLoggedIn() {
         boolean avatarExists = true;
         try {
@@ -92,6 +95,7 @@ public class Header {
         return this;
     }
 
+    @Step("Assert user is not logged in")
     public Header assertIncorrectLogin() {
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(incorretPasswordMessage));
         String currectMessage = errorMessage.getText();
@@ -102,6 +106,7 @@ public class Header {
         return this;
     }
 
+    @Step("Logout user if already logged in")
     public Header logOut() {
         assertUserLoggedIn();
         username.click();
@@ -109,6 +114,7 @@ public class Header {
         return this;
     }
 
+    @Step("Click on Sign In/Up button and register")
     public Header register(String email, String password) {
         signInUpButton.click();
         registerTab.click();
@@ -119,6 +125,7 @@ public class Header {
         return this;
     }
 
+    @Step("Assert registration success")
     public Header assertRegistrationSuccess(String message) {
         WebElement currentMessage = wait.until(ExpectedConditions.visibilityOf(successMessage));
         assert currentMessage.isDisplayed() : "Success message is not displayed";
