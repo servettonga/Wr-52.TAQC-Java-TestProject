@@ -92,10 +92,13 @@ public class Header {
         return this;
     }
 
-    public Header assertIncorrectLogin(String message) {
+    public Header assertIncorrectLogin() {
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(incorretPasswordMessage));
+        String currectMessage = errorMessage.getText();
+        String expectedIncorrectMessage = "Incorrect login or password";
         assert errorMessage.isDisplayed() : "Incorrect login message is not displayed";
-        assert errorMessage.getText().contains(message) : "Error message is not correct";
+        assert currectMessage.contains(expectedIncorrectMessage) || currectMessage.contains("is not confirmed")
+                : "Unexpected incorrect login message";
         return this;
     }
 

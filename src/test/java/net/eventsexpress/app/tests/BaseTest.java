@@ -20,6 +20,8 @@ abstract public class BaseTest {
     public static final String PASSWORD = DOTENV.get("PASSWORD");
     public static final String NEW_EMAIL = Utils.randomUser().get(0);
     public static final String NEW_PASSWORD = Utils.randomUser().get(1);
+    public static final String INCORRECT_EMAIL = "anyemail@mail.com";
+    public static final String INCORRECT_PASSWORD = "XXXXXXXXXXX";
     public static final String BASE_URL = ConfigurationManager.getConfig().getString("BASE_URL");
 
     @BeforeMethod

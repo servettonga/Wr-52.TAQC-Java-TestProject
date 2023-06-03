@@ -24,10 +24,9 @@ public class LoginTests extends BaseTest {
     @Description("An invalid user can not login to the application")
     @Story("Invalid username and password login test")
     public void invalidUserLoginFails() {
-        String expected = "Incorrect login or password";
         new Header()
-                .login(NEW_EMAIL, NEW_PASSWORD)
-                .assertIncorrectLogin(expected);
+                .login(INCORRECT_EMAIL, INCORRECT_PASSWORD)
+                .assertIncorrectLogin();
     }
 
 }
