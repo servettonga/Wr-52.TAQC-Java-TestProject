@@ -29,4 +29,11 @@ public class LoginTests extends BaseTest {
                 .assertIncorrectLogin();
     }
 
+    @Test(priority = 3)
+    public void registeredUserTryLoginWithoutConfirmingEmail() {
+        String expected = UNCONFIRMED_ACCOUNT_EMAIL + " is not confirmed, please confirm";
+        new Header()
+                .login(UNCONFIRMED_ACCOUNT_EMAIL, UNCONFIRMED_ACCOUNT_PASSWORD)
+                .assertLoginWithoutConfirmation(expected);
+    }
 }

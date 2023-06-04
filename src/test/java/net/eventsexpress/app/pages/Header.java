@@ -33,7 +33,7 @@ public class Header {
     protected static final String SIGN_IN_UP_BTN_XPATH = "(//div[@class='MuiDialog-root'][2]//span[@class='MuiButton-label'])[2]";
     protected static final String SUCCESS_PAGE_ALERT_TEXT_CSS = "div.alert-success";
     protected static final String UNSUCCESS_PAGE_ALERT_TEXT_XPATH = "//input[@name='password']/parent::*/following-sibling::p[contains(@class, 'Mui-error')]";
-    protected static final String INCORRECT_PASSWORD_XPATH = "(//div[contains(@class, 'text-danger')])[1]";
+    protected static final String INCORRECT_PASSWORD_AND_UNCONFIRMED_MSG_XPATH = "(//div[contains(@class, 'text-danger')])[1]";
 
     @FindBy(css = SIGN_IN_UP_BTN_CSS)
     private WebElement signInUpButton;
@@ -50,8 +50,11 @@ public class Header {
     @FindBy(xpath = SIGN_IN_UP_BTN_XPATH)
     private WebElement signInUp;
 
-    @FindBy(xpath = INCORRECT_PASSWORD_XPATH)
+    @FindBy(xpath = INCORRECT_PASSWORD_AND_UNCONFIRMED_MSG_XPATH)
     private WebElement incorretPasswordMessage;
+
+    @FindBy(xpath = INCORRECT_PASSWORD_AND_UNCONFIRMED_MSG_XPATH)
+    private WebElement loginWithoutConfirmEmail;
 
     @FindBy(xpath = REGISTER_TAB_XPATH)
     private WebElement registerTab;
@@ -106,6 +109,12 @@ public class Header {
         assert currectMessage.contains(expectedIncorrectMessage) || currectMessage.contains("is not confirmed")
                 : "Unexpected incorrect login message";
         return this;
+    }
+
+    public void assertLoginWithoutConfirmation(String message) {
+        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(loginWithoutConfirmEmail));
+        assert errorMessage.isDisplayed() : "Element with message is not found";
+        assert errorMessage.getText().contains(message) : "Error message is not correct";
     }
 
     @Step("Logout user if already logged in")

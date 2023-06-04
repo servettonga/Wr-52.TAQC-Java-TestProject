@@ -25,6 +25,8 @@ abstract public class BaseTest {
     public static final User unconfirmedUser = new User(DOTENV.get("UNCONFIRMED_ACCOUNT_EMAIL"),
                                                         DOTENV.get("UNCONFIRMED_ACCOUNT_PASSWORD"));
     public static final String BASE_URL = ConfigurationManager.getConfig().getString("BASE_URL");
+    public static final String UNCONFIRMED_ACCOUNT_EMAIL = DOTENV.get("UNCONFIRMED_ACCOUNT_EMAIL");
+    public static final String UNCONFIRMED_ACCOUNT_PASSWORD = DOTENV.get("UNCONFIRMED_ACCOUNT_PASSWORD");
 
     @Step("Go to the base URL")
     @BeforeMethod
