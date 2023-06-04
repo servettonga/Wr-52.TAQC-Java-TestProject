@@ -20,15 +20,15 @@ public class AboutPage {
     }
 
     @FindBy(css =ABOUT_PAGE_HEADING_CSS)
-    private WebElement about_page_heading;
+    private WebElement aboutPageHeading;
 
     public String getAboutPageHeading(){
-        return about_page_heading.getText();
+        return aboutPageHeading.getText();
 
     }
 
     public AboutPage assertAboutPageHeadingIsDisplayed(){
-        WebElement heading = wait.until(ExpectedConditions.visibilityOf(about_page_heading));
+        WebElement heading = wait.until(ExpectedConditions.visibilityOf(aboutPageHeading));
         assert heading.isDisplayed() : "About Page Heading  is not displayed";
         return this;
     }
