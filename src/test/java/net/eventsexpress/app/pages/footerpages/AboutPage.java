@@ -21,10 +21,10 @@ public class AboutPage {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
 
-    @FindBy(css = ABOUT_PAGE_HEADING_CSS)
+    @FindBy(css =ABOUT_PAGE_HEADING_CSS)
     private WebElement aboutPageHeading;
 
-    public String getAboutPageHeading() {
+    public String getAboutPageHeading(){
         return aboutPageHeading.getText();
 
     }
