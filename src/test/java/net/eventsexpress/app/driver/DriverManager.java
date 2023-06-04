@@ -32,6 +32,10 @@ public class DriverManager {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--incognito");
                 chromeOptions.addArguments("--start-maximized");
+                if (System.getProperty("headless") != null && System.getProperty("headless").equalsIgnoreCase("true"))
+                    for (String arg : new String[] { "--headless", "--no-sandbox", "--disable-dev-shm-usage" }) {
+                        chromeOptions.addArguments(arg);
+                    }
                 return new ChromeDriver(chromeOptions);
             case "firefox":
                 WebDriverManager.firefoxdriver().setup();
