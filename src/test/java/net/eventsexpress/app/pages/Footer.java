@@ -27,5 +27,5 @@ public class Footer {
         privacyPageLink.click();
         return this;
     }
-
 }
+
