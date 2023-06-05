@@ -23,6 +23,8 @@ We are using simpliest github flow to organize our work:
 4. Please refer to `test.properties` file in the resources folder for configurations.
 5. Install Allure CLI https://docs.qameta.io/allure/#_installing_a_commandline and `execute allure --version` in console to make sure that allure is available.
 
-    Allure results will be generated in `target/allure-results` folder (see `allure.properties`).
+    - `mvn clean test` to run your tests
 
-    Run `allure serve target/allure-results` for Linux/macOS or `allure serve target\allure-results` for Windows command to start Allure web server to show report.
+    You can generate a report using the following command:
+
+    - `mvn allure:serve` report will be generated into temp folder. Web server with results will start.

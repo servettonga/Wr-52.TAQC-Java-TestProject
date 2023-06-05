@@ -35,6 +35,5 @@ venv.bak/
 .DS_Store
 .idea
 .vscode
-/target/*
-!/target/allure-results/categories.json
-!/target/allure-results/environment.properties
+/target/
+.allure/

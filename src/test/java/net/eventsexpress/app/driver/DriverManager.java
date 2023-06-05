@@ -1,7 +1,10 @@
 package net.eventsexpress.app.driver;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.Set;
-
+import net.eventsexpress.app.config.ConfigurationManager;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
@@ -11,9 +14,7 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
-import net.eventsexpress.app.config.ConfigurationManager;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 public class DriverManager {
@@ -84,4 +85,11 @@ public class DriverManager {
         }
     }
 
+    public static Dictionary<String, String> getBrowserInfo() {
+        getDriver();
+        Dictionary<String, String> browser = new Hashtable<>();
+        browser.put("name", ((RemoteWebDriver) driver).getCapabilities().getCapability("browserName").toString());
+        browser.put("version", ((RemoteWebDriver) driver).getCapabilities().getCapability("browserVersion").toString());
+        return browser;
+    }
 }
