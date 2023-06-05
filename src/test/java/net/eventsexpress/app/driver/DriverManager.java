@@ -88,8 +88,8 @@ public class DriverManager {
     public static Dictionary<String, String> getBrowserInfo() {
         getDriver();
         Dictionary<String, String> browser = new Hashtable<>();
-        browser.put("name", ((RemoteWebDriver) driver).getCapabilities().getCapability("browserName").toString());
-        browser.put("version", ((RemoteWebDriver) driver).getCapabilities().getCapability("browserVersion").toString());
+        browser.put("name", ((RemoteWebDriver) driver).getCapabilities().getBrowserName());
+        browser.put("version", ((RemoteWebDriver) driver).getCapabilities().getBrowserVersion());
         return browser;
     }
 }
