@@ -23,6 +23,9 @@ public class LandingPage {
     @FindBy(css = BACKGROUND_IMAGE_CSS)
     private WebElement backgroundImage;
 
+    @FindBy(xpath = FIND_EVENT_BTN_XPATH)
+    private WebElement findEventButton;
+
     public LandingPage() {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
@@ -36,5 +39,11 @@ public class LandingPage {
         }
         return null;
     }
+
+    public LandingPage findEvent() {
+        findEventButton.click();
+        return this;
+    }
+
 
 }
