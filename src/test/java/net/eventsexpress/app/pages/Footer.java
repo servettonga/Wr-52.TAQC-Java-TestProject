@@ -19,6 +19,9 @@ public class Footer {
     @FindBy(xpath = PRIVACY_LINK_XPATH)
     private WebElement privacyPageLink;
 
+    @FindBy(xpath= ABOUT_LINK_XPATH)
+    private WebElement aboutPageLink;
+
     public Footer() {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
@@ -27,5 +30,10 @@ public class Footer {
         privacyPageLink.click();
         return this;
     }
-}
 
+    public Footer navigateToAboutPage(){
+        aboutPageLink.click();
+        return this;
+    }
+
+}
