@@ -1,21 +1,34 @@
 package net.eventsexpress.app.pages;
 
+import java.time.Duration;
+
 import java.util.List;
+
+import net.eventsexpress.app.config.ConfigurationManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import net.eventsexpress.app.driver.DriverManager;
 
 public class EventsPage {
+    private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
+    private final WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
     protected static final String ADMIN_MENU_CSS = "#sub-nav";
     protected static final String NAV_PAGE_TITLE_CSS = "span.nav-item-text";
+    protected static final String UPCOMING_PUBLIC_EVENT_CSS = "img[alt~='Event']";
 
     @FindBy(css = ADMIN_MENU_CSS)
     private List<WebElement> adminPanelPages;
 
     @FindBy(css = NAV_PAGE_TITLE_CSS)
     private List<WebElement> navigationPages;
+
+    @FindBy(css = UPCOMING_PUBLIC_EVENT_CSS)
+    private WebElement upcomingEventLogo;
 
     public EventsPage() {
         PageFactory.initElements(DriverManager.getDriver(), this);
@@ -63,6 +76,12 @@ public class EventsPage {
                 break;
             }
         }
+        return this;
+    }
+
+    public EventsPage assertUpcomingEvents() {
+        WebElement eventLogo = wait.until(ExpectedConditions.visibilityOf(upcomingEventLogo));
+        assert eventLogo.isDisplayed() : "Success message is not displayed";
         return this;
     }
 
