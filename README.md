@@ -20,4 +20,9 @@ We are using simpliest github flow to organize our work:
 3. Create a .env file at the project’s root directory for credentials, add the following fields for administrator privileges:<br>
    `EMAIL="anyvalidemail@email.com"`<br>`PASSWORD="validpassword"`
 
-4. Please refer to test.properties file in the resources folder for configurations.
+4. Please refer to `test.properties` file in the resources folder for configurations.
+5. Install Allure CLI https://docs.qameta.io/allure/#_installing_a_commandline and `execute allure --version` in console to make sure that allure is available.
+
+    Allure results will be generated in `target/allure-results` folder (see `allure.properties`).
+
+    Run `allure serve target/allure-results` for Linux/macOS or `allure serve target\allure-results` for Windows command to start Allure web server to show report.

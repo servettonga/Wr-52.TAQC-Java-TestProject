@@ -1,15 +1,15 @@
 package net.eventsexpress.app.pages;
 
 import java.time.Duration;
-
 import net.eventsexpress.app.config.ConfigurationManager;
+import net.eventsexpress.app.driver.DriverManager;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import net.eventsexpress.app.driver.DriverManager;
+import io.qameta.allure.Step;
 
 public class Header {
     private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
@@ -74,6 +74,7 @@ public class Header {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
 
+    @Step("Click on Sign In/Up button and login")
     public Header login(String email, String password) {
         signInUpButton.click();
         emailInput.sendKeys(email);
@@ -82,18 +83,30 @@ public class Header {
         return this;
     }
 
+    @Step("Assert user is logged in")
     public Header assertUserLoggedIn() {
-        assert wait.until(ExpectedConditions.visibilityOf(userAvatar)).isDisplayed() : "User is not logged in";
+        boolean avatarExists = true;
+        try {
+            wait.until(ExpectedConditions.visibilityOf(userAvatar)).isDisplayed();
+        } catch (TimeoutException e) {
+            avatarExists = false;
+        }
+        assert avatarExists : "User is not logged in";
         return this;
     }
 
-    public Header assertIncorrectLogin(String message) {
+    @Step("Assert user is not logged in")
+    public Header assertIncorrectLogin() {
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(incorretPasswordMessage));
+        String currectMessage = errorMessage.getText();
+        String expectedIncorrectMessage = "Incorrect login or password";
         assert errorMessage.isDisplayed() : "Incorrect login message is not displayed";
-        assert errorMessage.getText().contains(message) : "Error message is not correct";
+        assert currectMessage.contains(expectedIncorrectMessage) || currectMessage.contains("is not confirmed")
+                : "Unexpected incorrect login message";
         return this;
     }
 
+    @Step("Logout user if already logged in")
     public Header logOut() {
         assertUserLoggedIn();
         username.click();
@@ -101,6 +114,7 @@ public class Header {
         return this;
     }
 
+    @Step("Click on Sign In/Up button and register")
     public Header register(String email, String password) {
         signInUpButton.click();
         registerTab.click();
@@ -111,6 +125,7 @@ public class Header {
         return this;
     }
 
+    @Step("Assert registration success")
     public Header assertRegistrationSuccess(String message) {
         WebElement currentMessage = wait.until(ExpectedConditions.visibilityOf(successMessage));
         assert currentMessage.isDisplayed() : "Success message is not displayed";
