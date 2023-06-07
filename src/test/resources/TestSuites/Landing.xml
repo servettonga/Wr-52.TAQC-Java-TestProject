@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Landing Page" verbose="1">
+    <test name="Event Test">
+        <classes>
+            <class name="net.eventsexpress.app.tests.EventTest" />
+        </classes>
+    </test>
+</suite>
