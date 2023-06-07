@@ -1,9 +1,11 @@
 package net.eventsexpress.app.driver;
 
+import com.google.common.collect.ImmutableMap;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Set;
+import net.eventsexpress.app.config.ConfigurationManager;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
@@ -16,13 +18,21 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
+
 public class DriverManager {
     private static WebDriver driver;
     private static final String driverOption = System.getProperty("driver").toLowerCase();
     private static final Boolean headless = Boolean.valueOf(System.getProperty("headless"));
+    public static final String BASE_URL = ConfigurationManager.getConfig().getString("BASE_URL");
+
 
     public static WebDriver getDriver() {
-        return driver == null ? driver = createDriver() : driver;
+        if (driver == null) {
+            driver = createDriver();
+            writeEvironment();
+        }
+        return driver;
     }
 
     private static WebDriver createDriver() {
@@ -81,7 +91,8 @@ public class DriverManager {
                 driver.switchTo().newWindow(WindowType.TAB);
             }
             driver.get(URL);
-        } catch (TimeoutException e) {
+        }
+        catch (TimeoutException e) {
             throw new RuntimeException("Site downloading failed, timeout");
         }
     }
@@ -93,4 +104,15 @@ public class DriverManager {
         browser.put("version", ((RemoteWebDriver) driver).getCapabilities().getBrowserVersion());
         return browser;
     }
+
+    private static void writeEvironment() {
+        Dictionary<String, String> browser = getBrowserInfo();
+        allureEnvironmentWriter(ImmutableMap.<String, String>builder()
+                .put("Browser", browser.get("name"))
+                .put("Browser Version", browser.get("version"))
+                .put("Base URL", BASE_URL)
+                .put("OS", System.getProperty("os.name"))
+                .build());
+    }
+
 }
