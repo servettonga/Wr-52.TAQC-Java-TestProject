@@ -20,4 +20,11 @@ We are using simpliest github flow to organize our work:
 3. Create a .env file at the project’s root directory for credentials, add the following fields for administrator privileges:<br>
    `EMAIL="anyvalidemail@email.com"`<br>`PASSWORD="validpassword"`
 
-4. Please refer to test.properties file in the resources folder for configurations.
+4. The project uses Chrome as default browser. You can run it with a different browser by adding argument to `mvn` command (e.g. `-Dbrowser=edge` for Edge browser). See `systemPropertyVariables` in `pom.xml`.
+5. Allure report by existing XML files will be generated during Maven build process.
+
+    - `mvn clean test` to run your tests
+
+    You can generate a report using the following command:
+
+    - `mvn allure:serve` report will be generated into temp folder. Web server with results will start.

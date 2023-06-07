@@ -1,0 +1,14 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Footer Pages" verbose="1">
+    <test name="About Page">
+        <classes>
+            <class name="net.eventsexpress.app.tests.AboutPageTest" />
+        </classes>
+    </test>
+    <test name="Privacy Page">
+        <classes>
+            <class name="net.eventsexpress.app.tests.PrivacyPageTest" />
+        </classes>
+    </test>
+</suite>
