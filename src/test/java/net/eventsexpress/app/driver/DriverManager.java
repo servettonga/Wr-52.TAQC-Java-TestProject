@@ -4,7 +4,6 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Set;
-import net.eventsexpress.app.config.ConfigurationManager;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
@@ -19,7 +18,8 @@ import org.openqa.selenium.safari.SafariDriver;
 
 public class DriverManager {
     private static WebDriver driver;
-    private static String driverOption = ConfigurationManager.getConfig().getString("DRIVER");
+    private static final String driverOption = System.getProperty("driver").toLowerCase();
+    private static final Boolean headless = Boolean.valueOf(System.getProperty("headless"));
 
     public static WebDriver getDriver() {
         return driver == null ? driver = createDriver() : driver;
@@ -33,8 +33,9 @@ public class DriverManager {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--incognito");
                 chromeOptions.addArguments("--start-maximized");
-                if (System.getProperty("headless") != null && System.getProperty("headless").equalsIgnoreCase("true")) {
-                    for (String arg : new String[] { "--headless", "--no-sandbox", "--disable-dev-shm-usage" }) {
+                if (headless) {
+                    for (String arg : new String[] {"--headless", "--no-sandbox",
+                            "--disable-dev-shm-usage"}) {
                         chromeOptions.addArguments(arg);
                     }
                 }
