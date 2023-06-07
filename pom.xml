@@ -86,6 +86,10 @@
                     <suiteXmlFiles>
                         <suiteXmlFile>./src/test/resources/TestSuites/AllTests.xml</suiteXmlFile>
                     </suiteXmlFiles>
+                    <systemPropertyVariables combine.children="append">
+                        <driver>chrome</driver>
+                        <headless>false</headless>
+                    </systemPropertyVariables>
                 </configuration>
                 <dependencies>
                     <dependency>
