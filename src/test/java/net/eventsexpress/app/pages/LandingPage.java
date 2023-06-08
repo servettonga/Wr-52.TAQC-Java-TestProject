@@ -40,7 +40,7 @@ public class LandingPage {
         return null;
     }
 
-    public LandingPage findEvent() {
+    public LandingPage clickOnFindEventButton() {
         findEventButton.click();
         return this;
     }

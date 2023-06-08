@@ -14,8 +14,20 @@ public class EventTest extends BaseTest {
                 .login(EMAIL, PASSWORD)
                 .assertUserLoggedIn();
         new LandingPage()
-                .findEvent();
+                .clickOnFindEventButton();
         new EventsPage()
                 .assertUpcomingEvents();
+    }
+
+    @Test(priority = 2)
+    public void verifyUpcomingEventDetails() {
+        new Header()
+                .login(EMAIL, PASSWORD)
+                .assertUserLoggedIn();
+        new LandingPage()
+                .clickOnFindEventButton();
+        new EventsPage()
+                .openEventDetails()
+                .assertUpcomingEventDetails();
     }
 }
