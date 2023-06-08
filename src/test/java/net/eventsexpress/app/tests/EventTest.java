@@ -9,14 +9,14 @@ import net.eventsexpress.app.pages.LandingPage;
 public class EventTest extends BaseTest {
 
     @Test(priority = 1)
-    public void verifyUpcomingEvents() {
+    public void verifyUpcomingEventsPage() {
         new Header()
                 .login(EMAIL, PASSWORD)
                 .assertUserLoggedIn();
         new LandingPage()
                 .clickOnFindEventButton();
         new EventsPage()
-                .assertUpcomingEvents();
+                .assertEventsPageOpened();
     }
 
     @Test(priority = 2)

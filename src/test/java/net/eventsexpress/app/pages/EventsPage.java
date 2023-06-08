@@ -83,14 +83,14 @@ public class EventsPage {
         return this;
     }
 
-    public EventsPage assertUpcomingEvents() {
-        WebElement eventLogo = wait.until(ExpectedConditions.visibilityOf(upcomingEventLogo));
-        assert eventLogo.isDisplayed() : "Success message is not displayed";
+    public EventsPage assertEventsPageOpened() {
+        assert DriverManager.getCurrentUrl().contains("https://eventsexpress-test.azurewebsites.net/home/events");
         return this;
     }
 
     public EventsPage openEventDetails() {
-        this.assertUpcomingEvents();
+        WebElement eventDetailsLogo = wait.until(ExpectedConditions.visibilityOf(upcomingEventLogo));
+        assert upcomingEventLogo.isDisplayed() : "Success message is not displayed";
         upcomingEventLogo.click();
         return this;
     }
