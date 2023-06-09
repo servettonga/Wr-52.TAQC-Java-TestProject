@@ -6,17 +6,20 @@ import java.util.regex.Pattern;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
+import io.qameta.allure.Step;
 import net.eventsexpress.app.driver.DriverManager;
 
 public class LandingPage {
     // Hero
-    protected static final String CREATE_EVENT_BTN_XPATH = "//button[contains(text(), 'Create event')]";
+    protected static final String CREATE_EVENT_BTN_XPATH =
+            "//button[contains(text(), 'Create event')]";
     protected static final String FIND_EVENT_BTN_XPATH = "//a[text()='Find event']";
-    protected static final String JOIN_EVENTSEXPRESS_BTN_XPATH = "//button[text()='Join EventsExpress']";
+    protected static final String JOIN_EVENTSEXPRESS_BTN_XPATH =
+            "//button[text()='Join EventsExpress']";
     // Upcoming Events
     protected static final String JOIN_EVENT_BTN_XPATH = "//a[text()='Join event']";
-    protected static final String EXPlORE_MORE_EVENTS_BTN_XPATH = "//a[text()='Explore more events']";
+    protected static final String EXPlORE_MORE_EVENTS_BTN_XPATH =
+            "//a[text()='Explore more events']";
     // UI
     protected static final String BACKGROUND_IMAGE_CSS = "article[style~='background-image:']";
 
@@ -40,10 +43,10 @@ public class LandingPage {
         return null;
     }
 
+    @Step("Click on 'Find event' button")
     public LandingPage findEvent() {
         findEventButton.click();
         return this;
     }
-
 
 }

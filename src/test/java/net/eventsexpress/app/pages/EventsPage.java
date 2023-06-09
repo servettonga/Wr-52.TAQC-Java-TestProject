@@ -1,22 +1,21 @@
 package net.eventsexpress.app.pages;
 
+import io.qameta.allure.Step;
 import java.time.Duration;
-
 import java.util.List;
-
 import net.eventsexpress.app.config.ConfigurationManager;
+import net.eventsexpress.app.driver.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import net.eventsexpress.app.driver.DriverManager;
 
 public class EventsPage {
     private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
-    private final WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
+    private final WebDriverWait wait =
+            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
     protected static final String ADMIN_MENU_CSS = "#sub-nav";
     protected static final String NAV_PAGE_TITLE_CSS = "span.nav-item-text";
     protected static final String UPCOMING_PUBLIC_EVENT_CSS = "img[alt~='Event']";
@@ -35,7 +34,7 @@ public class EventsPage {
     }
 
     public EventsPage adminPanel(String pageName) {
-        /*
+        /*-
          * Method for click on page depending on page_title value.
          * Pages of Admin Panel:
          * "Categories" - Edit_category
@@ -54,7 +53,7 @@ public class EventsPage {
     }
 
     public EventsPage navigation(String pageName) {
-        /*
+        /*-
          * Method for click on page depending on page_title value.
          * page_title values for admin:
          * 'Home' - Home page
@@ -79,6 +78,7 @@ public class EventsPage {
         return this;
     }
 
+    @Step("Assert that upcoming event logo is displayed")
     public EventsPage assertUpcomingEvents() {
         WebElement eventLogo = wait.until(ExpectedConditions.visibilityOf(upcomingEventLogo));
         assert eventLogo.isDisplayed() : "Success message is not displayed";
