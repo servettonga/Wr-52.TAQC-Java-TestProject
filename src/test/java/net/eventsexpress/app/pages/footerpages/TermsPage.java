@@ -22,7 +22,7 @@ public class TermsPage {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
 
-    public String getTermsHeading() {
+    public String getTermsHeadingText() {
         try {
             WebElement visibleTermsHeading = waitForVisibility(termsHeading);
             return visibleTermsHeading.getText();
