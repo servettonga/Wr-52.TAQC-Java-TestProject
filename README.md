@@ -28,3 +28,6 @@ We are using simpliest github flow to organize our work:
     You can generate a report using the following command:
 
     - `mvn allure:serve` report will be generated into temp folder. Web server with results will start.
+
+Once the changes have been made on develop branch, the most recent Allure test report will be published at this link:
+https://servettonga.github.io/Wr-52.TAQC-Java-TestProject/
