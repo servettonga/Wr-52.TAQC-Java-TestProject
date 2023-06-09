@@ -15,7 +15,8 @@ public class LoginTests extends BaseTest {
     @Story("Valid username and password login test")
     public void validUserLogin() {
         new Header()
-                .login(EMAIL, PASSWORD)
+                .setUser(admin)
+                .login()
                 .assertUserLoggedIn();
     }
 
@@ -25,7 +26,8 @@ public class LoginTests extends BaseTest {
     @Story("Invalid username and password login test")
     public void invalidUserLoginFails() {
         new Header()
-                .login(INCORRECT_EMAIL, INCORRECT_PASSWORD)
+                .setUser(invalidUser)
+                .login()
                 .assertIncorrectLogin();
     }
 

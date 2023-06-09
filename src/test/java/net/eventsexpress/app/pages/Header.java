@@ -1,17 +1,19 @@
 package net.eventsexpress.app.pages;
 
+import io.qameta.allure.Step;
 import java.time.Duration;
 import net.eventsexpress.app.config.ConfigurationManager;
 import net.eventsexpress.app.driver.DriverManager;
+import net.eventsexpress.app.utils.User;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import io.qameta.allure.Step;
 
 public class Header {
+    private User user;
     private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
     private final WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
     protected static final String EVENT_EXPRESS_LOGO_CSS = "#EEButton";
@@ -74,11 +76,16 @@ public class Header {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
 
+    public Header setUser(User user) {
+        this.user = user;
+        return this;
+    }
+
     @Step("Click on Sign In/Up button and login")
-    public Header login(String email, String password) {
+    public Header login() {
         signInUpButton.click();
-        emailInput.sendKeys(email);
-        passwordInput.sendKeys(password);
+        emailInput.sendKeys(user.username());
+        passwordInput.sendKeys(user.password());
         signInUp.click();
         return this;
     }
@@ -115,12 +122,12 @@ public class Header {
     }
 
     @Step("Click on Sign In/Up button and register")
-    public Header register(String email, String password) {
+    public Header register() {
         signInUpButton.click();
         registerTab.click();
-        emailInput.sendKeys(email);
-        passwordInput.sendKeys(password);
-        passwordInputRepeat.sendKeys(password);
+        emailInput.sendKeys(user.username());
+        passwordInput.sendKeys(user.password());
+        passwordInputRepeat.sendKeys(user.password());
         signInUp.click();
         return this;
     }

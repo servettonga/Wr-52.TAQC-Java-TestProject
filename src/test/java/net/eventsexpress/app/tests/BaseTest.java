@@ -7,7 +7,8 @@ import java.io.File;
 import java.io.IOException;
 import net.eventsexpress.app.config.ConfigurationManager;
 import net.eventsexpress.app.driver.DriverManager;
-import net.eventsexpress.app.utils.Utils;
+import net.eventsexpress.app.utils.User;
+import static net.eventsexpress.app.utils.Utils.newUser;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -18,12 +19,11 @@ import org.testng.annotations.BeforeMethod;
 
 abstract public class BaseTest {
     public static final Dotenv DOTENV = Dotenv.load();
-    public static final String EMAIL = DOTENV.get("EMAIL");
-    public static final String PASSWORD = DOTENV.get("PASSWORD");
-    public static final String NEW_EMAIL = Utils.randomUser().get(0);
-    public static final String NEW_PASSWORD = Utils.randomUser().get(1);
-    public static final String INCORRECT_EMAIL = "anyemail@mail.com";
-    public static final String INCORRECT_PASSWORD = "XXXXXXXXXXX";
+    public static final User admin = new User(DOTENV.get("EMAIL"), DOTENV.get("PASSWORD"));
+    public static final User newUser = newUser();
+    public static final User invalidUser = new User("anyemail@mail.com", "XXXXXXXXXXX");
+    public static final User unconfirmedUser = new User(DOTENV.get("UNCONFIRMED_ACCOUNT_EMAIL"),
+                                                        DOTENV.get("UNCONFIRMED_ACCOUNT_PASSWORD"));
     public static final String BASE_URL = ConfigurationManager.getConfig().getString("BASE_URL");
 
     @Step("Go to the base URL")

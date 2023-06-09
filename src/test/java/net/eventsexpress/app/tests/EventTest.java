@@ -4,9 +4,9 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import net.eventsexpress.app.pages.EventsPage;
 import net.eventsexpress.app.pages.Header;
+import net.eventsexpress.app.pages.LandingPage;
 import org.testng.annotations.Test;
 
-import net.eventsexpress.app.pages.LandingPage;
 
 public class EventTest extends BaseTest {
 
@@ -15,7 +15,8 @@ public class EventTest extends BaseTest {
     @Story("Navigation to Event page test")
     public void verifyUpcomingEventsPage() {
         new Header()
-                .login(EMAIL, PASSWORD)
+                .setUser(admin)
+                .login()
                 .assertUserLoggedIn();
         new LandingPage()
                 .clickOnFindEventButton();
