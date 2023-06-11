@@ -3,6 +3,7 @@ package net.eventsexpress.app.pages;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -40,6 +41,7 @@ public class LandingPage {
         return null;
     }
 
+    @Step("Click on 'Find event' button")
     public LandingPage clickOnFindEventButton() {
         findEventButton.click();
         return this;

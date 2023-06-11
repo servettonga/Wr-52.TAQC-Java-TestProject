@@ -2,8 +2,9 @@ package net.eventsexpress.app.pages;
 
 import java.time.Duration;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
-
+import io.qameta.allure.Step;
 import net.eventsexpress.app.config.ConfigurationManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +14,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import net.eventsexpress.app.driver.DriverManager;
+import org.testng.Assert;
 
 public class EventsPage {
     private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
@@ -83,21 +85,24 @@ public class EventsPage {
         return this;
     }
 
+    @Step("Assert that Event page is opened")
     public EventsPage assertEventsPageOpened() {
-        assert DriverManager.getCurrentUrl().contains("https://eventsexpress-test.azurewebsites.net/home/events");
+        assertThat(DriverManager.getCurrentUrl()).contains("/home/events");
         return this;
     }
 
+    @Step("Open event details")
     public EventsPage openEventDetails() {
-        WebElement eventDetailsLogo = wait.until(ExpectedConditions.visibilityOf(upcomingEventLogo));
-        assert upcomingEventLogo.isDisplayed() : "Success message is not displayed";
-        upcomingEventLogo.click();
+        WebElement eventLogo = wait.until(ExpectedConditions.visibilityOf(upcomingEventLogo));
+        assertThat(eventLogo.isDisplayed()).withFailMessage("Event is not displayed");
+        eventLogo.click();
         return this;
     }
 
+    @Step("Assert that upcoming event logo is displayed")
     public EventsPage assertUpcomingEventDetails() {
         WebElement eventDetailsLogo = wait.until(ExpectedConditions.visibilityOf(eventDetailsFullLogo));
-        assert eventDetailsLogo.isDisplayed() : "Success message is not displayed";
+        assertThat(eventDetailsLogo.isDisplayed()).withFailMessage("Event is not displayed");
         return this;
     }
 
