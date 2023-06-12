@@ -11,4 +11,9 @@
             <class name="net.eventsexpress.app.tests.PrivacyPageTest" />
         </classes>
     </test>
+    <test name="Terms Page">
+        <classes>
+            <class name="net.eventsexpress.app.tests.TermsPageTest" />
+        </classes>
+    </test>
 </suite>
