@@ -2,6 +2,7 @@ package net.eventsexpress.app.pages;
 
 import net.eventsexpress.app.driver.DriverManager;
 
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -26,6 +27,9 @@ public class Footer {
     @FindBy(xpath = ABOUT_LINK_XPATH)
     private WebElement aboutPageLink;
 
+    @FindBy(xpath = TERMS_LINK_XPATH)
+    private WebElement termsPageLink;
+
     public Footer() {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
@@ -42,4 +46,19 @@ public class Footer {
         return this;
     }
 
+    public boolean isTermsLinkDisplayed() {
+        try {
+            return termsPageLink.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    public void clickTermsLink() {
+        if (termsPageLink.isEnabled() && isTermsLinkDisplayed()) {
+            termsPageLink.click();
+        } else {
+            throw new NoSuchElementException("Terms link is not displayed or enabled");
+        }
+    }
 }
