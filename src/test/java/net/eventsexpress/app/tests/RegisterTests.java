@@ -16,8 +16,7 @@ public class RegisterTests extends BaseTest {
     public void validDataRegisters() {
         String expected = "Your register was successfull. Please confirm your email.";
         new Header()
-                .setUser(newUser)
-                .register()
+                .register(newUser)
                 .assertRegistrationSuccess(expected);
     }
 

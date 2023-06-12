@@ -13,7 +13,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Header {
-    private User user;
     private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
     private final WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
     protected static final String EVENT_EXPRESS_LOGO_CSS = "#EEButton";
@@ -76,13 +75,9 @@ public class Header {
         PageFactory.initElements(DriverManager.getDriver(), this);
     }
 
-    public Header setUser(User user) {
-        this.user = user;
-        return this;
-    }
 
     @Step("Click on Sign In/Up button and login")
-    public Header login() {
+    public Header login(User user) {
         signInUpButton.click();
         emailInput.sendKeys(user.username());
         passwordInput.sendKeys(user.password());
@@ -122,7 +117,7 @@ public class Header {
     }
 
     @Step("Click on Sign In/Up button and register")
-    public Header register() {
+    public Header register(User user) {
         signInUpButton.click();
         registerTab.click();
         emailInput.sendKeys(user.username());

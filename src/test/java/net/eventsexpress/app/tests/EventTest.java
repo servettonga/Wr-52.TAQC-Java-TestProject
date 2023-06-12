@@ -15,8 +15,7 @@ public class EventTest extends BaseTest {
     @Story("Navigation to Event page test")
     public void verifyUpcomingEventsPage() {
         new Header()
-                .setUser(admin)
-                .login()
+                .login(admin)
                 .assertUserLoggedIn();
         new LandingPage()
                 .clickOnFindEventButton();
@@ -29,7 +28,7 @@ public class EventTest extends BaseTest {
     @Story("Verifying event details test")
     public void verifyUpcomingEventDetails() {
         new Header()
-                .login(EMAIL, PASSWORD)
+                .login(admin)
                 .assertUserLoggedIn();
         new LandingPage()
                 .clickOnFindEventButton();
