@@ -12,12 +12,15 @@ import net.eventsexpress.app.driver.DriverManager;
 
 public class LandingPage {
     // Hero
-    protected static final String CREATE_EVENT_BTN_XPATH = "//button[contains(text(), 'Create event')]";
+    protected static final String CREATE_EVENT_BTN_XPATH =
+            "//button[contains(text(), 'Create event')]";
     protected static final String FIND_EVENT_BTN_XPATH = "//a[text()='Find event']";
-    protected static final String JOIN_EVENTSEXPRESS_BTN_XPATH = "//button[text()='Join EventsExpress']";
+    protected static final String JOIN_EVENTSEXPRESS_BTN_XPATH =
+            "//button[text()='Join EventsExpress']";
     // Upcoming Events
     protected static final String JOIN_EVENT_BTN_XPATH = "//a[text()='Join event']";
-    protected static final String EXPlORE_MORE_EVENTS_BTN_XPATH = "//a[text()='Explore more events']";
+    protected static final String EXPlORE_MORE_EVENTS_BTN_XPATH =
+            "//a[text()='Explore more events']";
     // UI
     protected static final String BACKGROUND_IMAGE_CSS = "article[style~='background-image:']";
 
