@@ -30,10 +30,13 @@ public class LoginTests extends BaseTest {
     }
 
     @Test(priority = 3)
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Registered User Try Login Without Confirming Email but he can't")
+    @Story("Unconfirmed user login test")
     public void registeredUserTryLoginWithoutConfirmingEmail() {
-        String expected = UNCONFIRMED_ACCOUNT_EMAIL + " is not confirmed, please confirm";
+        String expected = unconfirmedUser.username() + " is not confirmed, please confirm";
         new Header()
-                .login(UNCONFIRMED_ACCOUNT_EMAIL, UNCONFIRMED_ACCOUNT_PASSWORD)
+                .login(unconfirmedUser)
                 .assertLoginWithoutConfirmation(expected);
     }
 }
