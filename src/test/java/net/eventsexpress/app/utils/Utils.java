@@ -1,7 +1,5 @@
 package net.eventsexpress.app.utils;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class Utils {
     public static void sleep(long m) {
@@ -12,8 +10,7 @@ public class Utils {
         }
     }
 
-    public static List<String> randomUser() {
-        List<String> user = new ArrayList<>();
+    public static User newUser() {
         String email = "";
         String password = "";
         final String[] letters = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o",
@@ -29,8 +26,7 @@ public class Utils {
                     + numbers[(int) (Math.random() * numbers.length)]
                     + symbols[(int) (Math.random() * symbols.length)]);
         }
-        user.add(email + "@gmail.com");
-        user.add(password);
+        User user = new User(email + "@gmail.com", password);
         return user;
     }
 }

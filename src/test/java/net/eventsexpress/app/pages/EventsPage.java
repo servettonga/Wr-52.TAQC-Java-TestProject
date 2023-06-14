@@ -1,21 +1,17 @@
 package net.eventsexpress.app.pages;
 
-import io.qameta.allure.Step;
-import java.time.Duration;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import java.time.Duration;
 import java.util.List;
-import io.qameta.allure.Step;
-import net.eventsexpress.app.config.ConfigurationManager;
-import net.eventsexpress.app.driver.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import io.qameta.allure.Step;
+import net.eventsexpress.app.config.ConfigurationManager;
 import net.eventsexpress.app.driver.DriverManager;
-import org.testng.Assert;
+
 
 public class EventsPage {
     private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
