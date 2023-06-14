@@ -29,4 +29,14 @@ public class LoginTests extends BaseTest {
                 .assertIncorrectLogin();
     }
 
+    @Test(priority = 3)
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Registered User Try Login Without Confirming Email but he can't")
+    @Story("Unconfirmed user login test")
+    public void registeredUserTryLoginWithoutConfirmingEmail() {
+        String expected = unconfirmedUser.username() + " is not confirmed, please confirm";
+        new Header()
+                .login(unconfirmedUser)
+                .assertLoginWithoutConfirmation(expected);
+    }
 }
