@@ -2,6 +2,7 @@ package net.eventsexpress.app.tests;
 
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
+import net.eventsexpress.app.pages.EventDetailsPage;
 import net.eventsexpress.app.pages.EventsPage;
 import net.eventsexpress.app.pages.Header;
 import net.eventsexpress.app.pages.LandingPage;
@@ -35,5 +36,21 @@ public class EventTest extends BaseTest {
         new EventsPage()
                 .openEventDetails()
                 .assertUpcomingEventDetails();
+    }
+
+    @Test(priority = 3)
+    @Description("Authorized user can add comment to the event")
+    @Story("Add comment to the event test")
+    public void addCommentToEventDetails() {
+        new Header()
+                .login(admin)
+                .assertUserLoggedIn();
+        new LandingPage()
+                .clickOnFindEventButton();
+        new EventsPage()
+                .openEventDetails();
+        new EventDetailsPage()
+                .addCommentToEvent()
+                .assertAddedComment();
     }
 }
