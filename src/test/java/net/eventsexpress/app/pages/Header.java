@@ -1,5 +1,6 @@
 package net.eventsexpress.app.pages;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import io.qameta.allure.Step;
 import java.time.Duration;
 import net.eventsexpress.app.config.ConfigurationManager;
@@ -96,7 +97,7 @@ public class Header {
         } catch (TimeoutException e) {
             avatarExists = false;
         }
-        assert avatarExists : "User is not logged in";
+        assertThat(avatarExists).withFailMessage("User is not logged in").isTrue();
         return this;
     }
 
@@ -105,16 +106,18 @@ public class Header {
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(incorretPasswordMessage));
         String currectMessage = errorMessage.getText();
         String expectedIncorrectMessage = "Incorrect login or password";
-        assert errorMessage.isDisplayed() : "Incorrect login message is not displayed";
-        assert currectMessage.contains(expectedIncorrectMessage) || currectMessage.contains("is not confirmed")
-                : "Unexpected incorrect login message";
+        assertThat(errorMessage.isDisplayed())
+                    .withFailMessage("Incorrect login message is not displayed").isTrue();
+        assertThat(currectMessage.contains(expectedIncorrectMessage) || currectMessage.contains("is not confirmed"))
+                    .withFailMessage("Unexpected incorrect login message").isTrue();
         return this;
     }
 
     public void assertLoginWithoutConfirmation(String message) {
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(loginWithoutConfirmEmail));
-        assert errorMessage.isDisplayed() : "Element with message is not found";
-        assert errorMessage.getText().contains(message) : "Error message is not correct";
+        assertThat(errorMessage.isDisplayed())
+                    .withFailMessage("Element with message is not found").isTrue();
+        assertThat(errorMessage.getText().contains(message)).withFailMessage("Error message is not correct").isTrue();
     }
 
     @Step("Logout user if already logged in")
@@ -139,13 +142,17 @@ public class Header {
     @Step("Assert registration success")
     public Header assertRegistrationSuccess(String message) {
         WebElement currentMessage = wait.until(ExpectedConditions.visibilityOf(successMessage));
-        assert currentMessage.isDisplayed() : "Success message is not displayed";
-        assert currentMessage.getText().contains(message) : "Success message is not correct";
+        assertThat(currentMessage.isDisplayed())
+                    .withFailMessage("Success message is not displayed").isTrue();
+        assertThat(currentMessage.getText().contains(message))
+                    .withFailMessage("Success message is not correct").isTrue();
         return this;
     }
 
+    @Step("Assert that dropdown menu is displayed")
     public Header assertDropdownMenuDisplayed() {
-        assert dropdownMenu.getAttribute("class").contains("show") : "Dropdown menu is not displayed";
+        assertThat(dropdownMenu.getAttribute("class").contains("show"))
+                    .withFailMessage("Dropdown menu is not displayed").isTrue();
         return this;
     }
 }

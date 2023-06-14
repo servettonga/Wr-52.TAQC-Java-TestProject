@@ -1,5 +1,6 @@
 package net.eventsexpress.app.pages.footerpages;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import io.qameta.allure.Step;
 import java.time.Duration;
 import net.eventsexpress.app.config.ConfigurationManager;
@@ -32,7 +33,8 @@ public class AboutPage {
     @Step("Assert About Page heading is displayed")
     public AboutPage assertAboutPageHeadingIsDisplayed() {
         WebElement heading = wait.until(ExpectedConditions.visibilityOf(aboutPageHeading));
-        assert heading.isDisplayed() : "About Page Heading  is not displayed";
+        assertThat(heading.isDisplayed())
+                    .withFailMessage("About Page Heading is not displayed").isTrue();
         return this;
     }
 
