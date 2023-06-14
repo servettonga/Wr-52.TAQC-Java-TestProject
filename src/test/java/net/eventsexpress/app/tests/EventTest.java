@@ -43,7 +43,7 @@ public class EventTest extends BaseTest {
     @Story("Add comment to the event test")
     public void addCommentToEventDetails() {
         new Header()
-                .login(EMAIL, PASSWORD)
+                .login(admin)
                 .assertUserLoggedIn();
         new LandingPage()
                 .clickOnFindEventButton();
