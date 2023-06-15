@@ -12,36 +12,46 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class Header extends BasePage {
     protected static final String EVENT_EXPRESS_LOGO_CSS = "#EEButton";
-    protected static final String LOG_OUT_XPATH = "//button[contains(text(), 'log out')]";
+    // Dropdown Menu
+    protected static final String DROPDOWN_MENU_XPATH = "//div[contains(@class, 'dropdown-menu')]";
+    protected static final String USER_AVATAR_XPATH = "//div[contains(@class, 'MuiAvatar')]";
     protected static final String USERNAME_XPATH = "//p[@id='userNameAlign']";
     protected static final String MY_PROFILE_XPATH = "//button[contains(text(), 'my profile')]";
     protected static final String HELP_AND_FEEDBACK_XPATH = "//button[contains(text(), 'help and feedback')]";
-    protected static final String DROPDOWN_MENU_XPATH = "//div[contains(@class, 'dropdown-menu')]";
-    protected static final String USER_AVATAR_XPATH = "//div[contains(@class, 'MuiAvatar')]";
+    protected static final String LOG_OUT_XPATH = "//button[contains(text(), 'log out')]";
     // Login Modal
     protected static final String SIGN_IN_UP_BTN_CSS = "#headbtn";
-    protected static final String MODAL_DIALOG_XPATH = "//div[@class='MuiDialog-root'][2]";
     protected static final String LOGIN_TAB_XPATH = "(//button[@role='tab']//span[text()='Login'])[2]";
     protected static final String REGISTER_TAB_XPATH = "(//button[@role='tab']//span[text()='Register'])[2]";
-    protected static final String EMAIL_INP_XPATH = MODAL_DIALOG_XPATH + "//input[@name='email']";
-    protected static final String PASSWORD_INP_XPATH = MODAL_DIALOG_XPATH + "//input[@name='password']";
-    protected static final String REPASSWORD_INP_XPATH = MODAL_DIALOG_XPATH + "//input[@name='RepeatPassword']";
+    // Sign In
+    protected static final String EMAIL_INP_SIGNIN_XPATH = "(//span[ . = 'Sign In']/ancestor::form//input[@name='email'])[2]";
+    protected static final String PASSWORD_INP_SIGNIN_XPATH = "(//span[ . = 'Sign In']/ancestor::form//input[@name='password'])[2]";
     protected static final String SIGN_IN_UP_BTN_XPATH = "(//div[@class='MuiDialog-root'][2]//span[@class='MuiButton-label'])[2]";
+    protected static final String INCORRECT_PASSWORD_AND_UNCONFIRMED_MSG_XPATH = "(//div[contains(@class, 'text-danger')])[1]";
+    // Sign Up
+    protected static final String EMAIL_INP_SIGNUP_XPATH = "(//span[ . = 'Sign Up']/ancestor::form//input[@name='email'])[1]";
+    protected static final String PASSWORD_INP_SIGNUP_XPATH = "(//span[ . = 'Sign Up']/ancestor::form//input[@name='password'])[1]";
+    protected static final String REPASSWORD_INP_SIGNUP_XPATH = "(//span[ . = 'Sign Up']/ancestor::form//input[@name='RepeatPassword'])[1]";
     protected static final String SUCCESS_PAGE_ALERT_TEXT_CSS = "div.alert-success";
     protected static final String UNSUCCESS_PAGE_ALERT_TEXT_XPATH = "//input[@name='password']/parent::*/following-sibling::p[contains(@class, 'Mui-error')]";
-    protected static final String INCORRECT_PASSWORD_AND_UNCONFIRMED_MSG_XPATH = "(//div[contains(@class, 'text-danger')])[1]";
 
     @FindBy(css = SIGN_IN_UP_BTN_CSS)
     private WebElement signInUpButton;
 
-    @FindBy(xpath = EMAIL_INP_XPATH)
-    private WebElement emailInput;
+    @FindBy(xpath = EMAIL_INP_SIGNIN_XPATH)
+    private WebElement emailInputSignIn;
 
-    @FindBy(xpath = PASSWORD_INP_XPATH)
+    @FindBy(xpath = EMAIL_INP_SIGNUP_XPATH)
+    private WebElement emailInputSignUp;
+
+    @FindBy(xpath = PASSWORD_INP_SIGNIN_XPATH)
     private WebElement passwordInput;
 
-    @FindBy(xpath = REPASSWORD_INP_XPATH)
-    private WebElement passwordInputRepeat;
+    @FindBy(xpath = PASSWORD_INP_SIGNUP_XPATH)
+    private WebElement passwordInputSignUp;
+
+    @FindBy(xpath = REPASSWORD_INP_SIGNUP_XPATH)
+    private WebElement repasswordInputSignUp;
 
     @FindBy(xpath = SIGN_IN_UP_BTN_XPATH)
     private WebElement signInUp;
@@ -74,13 +84,13 @@ public class Header extends BasePage {
     @Step("Click on Sign In/Up button and login")
     public Header login(User user) {
         signInUpButton.click();
-        emailInput.sendKeys(user.username());
+        emailInputSignIn.sendKeys(user.username());
         passwordInput.sendKeys(user.password());
         signInUp.click();
         return this;
     }
 
-    @Step("Assert user is logged in")
+    @Step("Assert that user is logged in")
     public Header assertUserLoggedIn() {
         boolean avatarExists = true;
         try {
@@ -92,7 +102,7 @@ public class Header extends BasePage {
         return this;
     }
 
-    @Step("Assert user is not logged in")
+    @Step("Assert that user is not logged in")
     public Header assertIncorrectLogin() {
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(incorretPasswordMessage));
         String currectMessage = errorMessage.getText();
@@ -104,6 +114,7 @@ public class Header extends BasePage {
         return this;
     }
 
+    @Step("Assert that error message is displayed")
     public void assertLoginWithoutConfirmation(String message) {
         WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(loginWithoutConfirmEmail));
         assertThat(errorMessage.isDisplayed())
@@ -123,9 +134,9 @@ public class Header extends BasePage {
     public Header register(User user) {
         signInUpButton.click();
         registerTab.click();
-        emailInput.sendKeys(user.username());
-        passwordInput.sendKeys(user.password());
-        passwordInputRepeat.sendKeys(user.password());
+        emailInputSignUp.sendKeys(user.username());
+        passwordInputSignUp.sendKeys(user.password());
+        repasswordInputSignUp.sendKeys(user.password());
         signInUp.click();
         return this;
     }
@@ -146,4 +157,5 @@ public class Header extends BasePage {
                     .withFailMessage("Dropdown menu is not displayed").isTrue();
         return this;
     }
+
 }
