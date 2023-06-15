@@ -2,20 +2,15 @@ package net.eventsexpress.app.pages;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import io.qameta.allure.Step;
-import java.time.Duration;
-import net.eventsexpress.app.config.ConfigurationManager;
-import net.eventsexpress.app.driver.DriverManager;
+import net.eventsexpress.app.common.BasePage;
 import net.eventsexpress.app.utils.User;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class Header {
-    private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
-    private final WebDriverWait wait = new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
+
+public class Header extends BasePage {
     protected static final String EVENT_EXPRESS_LOGO_CSS = "#EEButton";
     protected static final String LOG_OUT_XPATH = "//button[contains(text(), 'log out')]";
     protected static final String USERNAME_XPATH = "//p[@id='userNameAlign']";
@@ -74,10 +69,6 @@ public class Header {
 
     @FindBy(xpath = DROPDOWN_MENU_XPATH)
     private WebElement dropdownMenu;
-
-    public Header() {
-        PageFactory.initElements(DriverManager.getDriver(), this);
-    }
 
 
     @Step("Click on Sign In/Up button and login")

@@ -88,7 +88,6 @@ public class EventDetailsPage {
 
     @Step("Assert that comment added to the event details")
     public EventDetailsPage assertAddedComment() {
-        WebElement lastCommentField = wait.until(ExpectedConditions.visibilityOf(commentFieldInput));
         assertThat(this.getEventComments().get(this.getEventComments().size() - 1)).isEqualTo("test4");
         this.deleteCreatedComment();
         return this;

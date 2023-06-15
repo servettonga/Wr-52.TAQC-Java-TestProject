@@ -1,26 +1,20 @@
 package net.eventsexpress.app.pages.footerpages;
 
-import net.eventsexpress.app.config.ConfigurationManager;
+import java.time.Duration;
+import net.eventsexpress.app.common.BasePage;
 import net.eventsexpress.app.driver.DriverManager;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-public class TermsPage {
-    private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
+public class TermsPage extends BasePage {
     protected static final String TERMS_HEADING_CSS = ".terms h1";
 
     @FindBy(css = TERMS_HEADING_CSS)
     private WebElement termsHeading;
 
-    public TermsPage() {
-        PageFactory.initElements(DriverManager.getDriver(), this);
-    }
 
     public String getTermsHeadingText() {
         try {
@@ -35,4 +29,5 @@ public class TermsPage {
         return new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout))
                 .until(ExpectedConditions.visibilityOf(element));
     }
+
 }

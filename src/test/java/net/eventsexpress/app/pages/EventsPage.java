@@ -1,22 +1,16 @@
 package net.eventsexpress.app.pages;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import java.time.Duration;
+import io.qameta.allure.Step;
 import java.util.List;
+import net.eventsexpress.app.common.BasePage;
+import net.eventsexpress.app.driver.DriverManager;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import io.qameta.allure.Step;
-import net.eventsexpress.app.config.ConfigurationManager;
-import net.eventsexpress.app.driver.DriverManager;
 
 
-public class EventsPage {
-    private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
-    private final WebDriverWait wait =
-            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
+public class EventsPage extends BasePage {
     protected static final String ADMIN_MENU_CSS = "#sub-nav";
     protected static final String NAV_PAGE_TITLE_CSS = "span.nav-item-text";
     protected static final String UPCOMING_PUBLIC_EVENT_CSS = "img[alt~='Event']";
@@ -34,9 +28,6 @@ public class EventsPage {
     @FindBy(xpath = EVENT_DETAILS_LOGO_XPATH)
     private WebElement eventDetailsFullLogo;
 
-    public EventsPage() {
-        PageFactory.initElements(DriverManager.getDriver(), this);
-    }
 
     public EventsPage adminPanel(String pageName) {
         /*-

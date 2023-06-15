@@ -1,14 +1,13 @@
 package net.eventsexpress.app.pages;
 
-import net.eventsexpress.app.driver.DriverManager;
-
+import io.qameta.allure.Step;
+import net.eventsexpress.app.common.BasePage;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import io.qameta.allure.Step;
 
-public class Footer {
+
+public class Footer extends BasePage {
     protected static final String FOOTER_XPATH = "//footer";
     protected static final String PRIVACY_LINK_XPATH = "//footer//a[@href='/privacy']";
     protected static final String TERMS_LINK_XPATH = "//footer//a[@href='/terms']";
@@ -30,9 +29,6 @@ public class Footer {
     @FindBy(xpath = TERMS_LINK_XPATH)
     private WebElement termsPageLink;
 
-    public Footer() {
-        PageFactory.initElements(DriverManager.getDriver(), this);
-    }
 
     @Step("Click on Privacy link")
     public Footer navigateToPrivacyPage() {
@@ -61,4 +57,5 @@ public class Footer {
             throw new NoSuchElementException("Terms link is not displayed or enabled");
         }
     }
+
 }
