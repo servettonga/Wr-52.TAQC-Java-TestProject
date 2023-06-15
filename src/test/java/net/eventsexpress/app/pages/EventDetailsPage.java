@@ -2,21 +2,15 @@ package net.eventsexpress.app.pages;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import io.qameta.allure.Step;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import net.eventsexpress.app.config.ConfigurationManager;
-import net.eventsexpress.app.driver.DriverManager;
+import net.eventsexpress.app.common.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class EventDetailsPage {
-    private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
-    private final WebDriverWait wait =
-            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
+
+public class EventDetailsPage extends BasePage {
     protected static final String EVENT_PHOTO_XPATH = "//img[contains(@id,'eventFullPhoto')]";
     protected static final String EVENT_NAME_XPATH = "//span[@class='title']";
     protected static final String EVENT_DATE_XPATH = "//time/..";
@@ -52,9 +46,6 @@ public class EventDetailsPage {
     @FindBy(xpath = ALL_COMMENTS)
     private List<WebElement> allComments;
 
-    public EventDetailsPage() {
-        PageFactory.initElements(DriverManager.getDriver(), this);
-    }
 
     public String getEventName() {
         return eventName.getText();
