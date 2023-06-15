@@ -1,11 +1,9 @@
 package net.eventsexpress.app.driver;
 
-import com.google.common.collect.ImmutableMap;
-import io.github.bonigarcia.wdm.WebDriverManager;
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Set;
-import net.eventsexpress.app.config.ConfigurationManager;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
@@ -17,8 +15,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
-
-import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
+import com.google.common.collect.ImmutableMap;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import net.eventsexpress.app.config.ConfigurationManager;
 
 public class DriverManager {
     private static WebDriver driver;
@@ -83,14 +82,14 @@ public class DriverManager {
         return driver.getCurrentUrl();
     }
 
-    public static void goToSite(String URL) {
+    public static void goToSite() {
         // Method for open site
         try {
             Set<String> tabs = driver.getWindowHandles();
             if (tabs.size() == 0) {
                 driver.switchTo().newWindow(WindowType.TAB);
             }
-            driver.get(URL);
+            driver.get(BASE_URL);
         }
         catch (TimeoutException e) {
             throw new RuntimeException("Site downloading failed, timeout");

@@ -1,11 +1,11 @@
 package net.eventsexpress.app.tests;
 
+import org.testng.annotations.Test;
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import io.qameta.allure.Story;
 import net.eventsexpress.app.pages.Header;
-import org.testng.annotations.Test;
 
 public class LoginTests extends BaseTest {
 
@@ -39,4 +39,5 @@ public class LoginTests extends BaseTest {
                 .login(unconfirmedUser)
                 .assertLoginWithoutConfirmation(expected);
     }
+
 }

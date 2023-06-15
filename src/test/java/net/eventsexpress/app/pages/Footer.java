@@ -1,10 +1,13 @@
 package net.eventsexpress.app.pages;
 
-import io.qameta.allure.Step;
-import net.eventsexpress.app.common.BasePage;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import io.qameta.allure.Step;
+import net.eventsexpress.app.common.BasePage;
+import net.eventsexpress.app.pages.footerpages.AboutPage;
+import net.eventsexpress.app.pages.footerpages.PrivacyPage;
+import net.eventsexpress.app.pages.footerpages.TermsPage;
 
 
 public class Footer extends BasePage {
@@ -31,18 +34,18 @@ public class Footer extends BasePage {
 
 
     @Step("Click on Privacy link")
-    public Footer navigateToPrivacyPage() {
+    public PrivacyPage navigateToPrivacyPage() {
         privacyPageLink.click();
-        return this;
+        return new PrivacyPage();
     }
 
     @Step("Click on About link")
-    public Footer navigateToAboutPage() {
+    public AboutPage navigateToAboutPage() {
         aboutPageLink.click();
-        return this;
+        return new AboutPage();
     }
 
-    public boolean isTermsLinkDisplayed() {
+    private boolean isTermsLinkDisplayed() {
         try {
             return termsPageLink.isDisplayed();
         } catch (NoSuchElementException e) {
@@ -50,9 +53,11 @@ public class Footer extends BasePage {
         }
     }
 
-    public void clickTermsLink() {
+    @Step("Click on Terms link")
+    public TermsPage clickTermsLink() {
         if (termsPageLink.isEnabled() && isTermsLinkDisplayed()) {
             termsPageLink.click();
+            return new TermsPage();
         } else {
             throw new NoSuchElementException("Terms link is not displayed or enabled");
         }
