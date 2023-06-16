@@ -1,7 +1,7 @@
 package net.eventsexpress.app.tests;
 
-import org.testng.annotations.Test;
 import net.eventsexpress.app.pages.Footer;
+import org.testng.annotations.Test;
 
 public class AboutPageTest extends BaseTest{
     @Test
@@ -11,4 +11,5 @@ public class AboutPageTest extends BaseTest{
                 .assertAboutPageHeadingIsDisplayed();
 
     }
+
 }

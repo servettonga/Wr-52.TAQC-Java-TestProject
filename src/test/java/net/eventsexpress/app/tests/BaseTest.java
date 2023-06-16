@@ -1,19 +1,19 @@
 package net.eventsexpress.app.tests;
 
 import static net.eventsexpress.app.utils.Utils.newUser;
+import io.github.cdimascio.dotenv.Dotenv;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import java.io.File;
 import java.io.IOException;
+import net.eventsexpress.app.driver.DriverManager;
+import net.eventsexpress.app.utils.User;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import io.github.cdimascio.dotenv.Dotenv;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Step;
-import net.eventsexpress.app.driver.DriverManager;
-import net.eventsexpress.app.utils.User;
 
 
 abstract public class BaseTest {
@@ -28,7 +28,7 @@ abstract public class BaseTest {
     @BeforeMethod
     public void beforeMethod() {
         DriverManager.getDriver();
-        DriverManager.goToSite();
+        DriverManager.goToHomePage();
     }
 
     @Step("Quit driver")

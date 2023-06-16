@@ -1,12 +1,12 @@
 package net.eventsexpress.app.tests;
 
-import org.testng.annotations.Test;
 import io.qameta.allure.Description;
 import io.qameta.allure.Story;
 import net.eventsexpress.app.pages.EventDetailsPage;
 import net.eventsexpress.app.pages.EventsPage;
 import net.eventsexpress.app.pages.Header;
 import net.eventsexpress.app.pages.LandingPage;
+import org.testng.annotations.Test;
 
 
 public class EventTest extends BaseTest {
@@ -47,7 +47,7 @@ public class EventTest extends BaseTest {
                 .assertUserLoggedIn()
         .navigateTo(LandingPage.class)
                 .clickOnFindEventButton()
-                .navigateTo(EventsPage.class)
+        .navigateTo(EventsPage.class)
                 .openEventDetails()
         .navigateTo(EventDetailsPage.class)
                 .addCommentToEvent()

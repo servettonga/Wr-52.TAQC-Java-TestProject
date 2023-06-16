@@ -1,9 +1,12 @@
 package net.eventsexpress.app.driver;
 
 import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
+import com.google.common.collect.ImmutableMap;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Set;
+import net.eventsexpress.app.config.ConfigurationManager;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
@@ -15,9 +18,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
-import com.google.common.collect.ImmutableMap;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import net.eventsexpress.app.config.ConfigurationManager;
 
 public class DriverManager {
     private static WebDriver driver;
@@ -82,7 +82,7 @@ public class DriverManager {
         return driver.getCurrentUrl();
     }
 
-    public static void goToSite() {
+    public static void goToHomePage() {
         // Method for open site
         try {
             Set<String> tabs = driver.getWindowHandles();
