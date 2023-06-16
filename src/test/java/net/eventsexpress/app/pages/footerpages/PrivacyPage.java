@@ -1,5 +1,6 @@
 package net.eventsexpress.app.pages.footerpages;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import io.qameta.allure.Step;
 import java.time.Duration;
 import net.eventsexpress.app.config.ConfigurationManager;
@@ -31,7 +32,8 @@ public class PrivacyPage {
     @Step("Assert Privacy Heading is displayed")
     public PrivacyPage assertPrivacyHeadingIsDisplayed() {
         WebElement heading = wait.until(ExpectedConditions.visibilityOf(privacyHeading));
-        assert heading.isDisplayed() : "Privacy Heading  is not displayed";
+        assertThat(heading.isDisplayed())
+                    .withFailMessage("Privacy Heading  is not displayed").isTrue();
         return this;
     }
 
