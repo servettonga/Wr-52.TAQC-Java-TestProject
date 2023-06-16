@@ -1,14 +1,16 @@
 package net.eventsexpress.app.pages;
 
-import net.eventsexpress.app.driver.DriverManager;
-
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import io.qameta.allure.Step;
+import net.eventsexpress.app.common.BasePage;
+import net.eventsexpress.app.pages.footerpages.AboutPage;
+import net.eventsexpress.app.pages.footerpages.PrivacyPage;
+import net.eventsexpress.app.pages.footerpages.TermsPage;
 
-public class Footer {
+
+public class Footer extends BasePage {
     protected static final String FOOTER_XPATH = "//footer";
     protected static final String PRIVACY_LINK_XPATH = "//footer//a[@href='/privacy']";
     protected static final String TERMS_LINK_XPATH = "//footer//a[@href='/terms']";
@@ -30,23 +32,20 @@ public class Footer {
     @FindBy(xpath = TERMS_LINK_XPATH)
     private WebElement termsPageLink;
 
-    public Footer() {
-        PageFactory.initElements(DriverManager.getDriver(), this);
-    }
 
     @Step("Click on Privacy link")
-    public Footer navigateToPrivacyPage() {
+    public PrivacyPage navigateToPrivacyPage() {
         privacyPageLink.click();
-        return this;
+        return new PrivacyPage();
     }
 
     @Step("Click on About link")
-    public Footer navigateToAboutPage() {
+    public AboutPage navigateToAboutPage() {
         aboutPageLink.click();
-        return this;
+        return new AboutPage();
     }
 
-    public boolean isTermsLinkDisplayed() {
+    private boolean isTermsLinkDisplayed() {
         try {
             return termsPageLink.isDisplayed();
         } catch (NoSuchElementException e) {
@@ -54,11 +53,14 @@ public class Footer {
         }
     }
 
-    public void clickTermsLink() {
+    @Step("Click on Terms link")
+    public TermsPage clickTermsLink() {
         if (termsPageLink.isEnabled() && isTermsLinkDisplayed()) {
             termsPageLink.click();
+            return new TermsPage();
         } else {
             throw new NoSuchElementException("Terms link is not displayed or enabled");
         }
     }
+
 }

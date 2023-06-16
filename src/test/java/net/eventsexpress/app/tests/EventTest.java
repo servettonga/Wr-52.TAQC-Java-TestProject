@@ -17,10 +17,10 @@ public class EventTest extends BaseTest {
     public void verifyUpcomingEventsPage() {
         new Header()
                 .login(admin)
-                .assertUserLoggedIn();
-        new LandingPage()
-                .clickOnFindEventButton();
-        new EventsPage()
+                .assertUserLoggedIn()
+        .navigateTo(LandingPage.class)
+                .clickOnFindEventButton()
+        .navigateTo(EventsPage.class)
                 .assertEventsPageOpened();
     }
 
@@ -30,10 +30,10 @@ public class EventTest extends BaseTest {
     public void verifyUpcomingEventDetails() {
         new Header()
                 .login(admin)
-                .assertUserLoggedIn();
-        new LandingPage()
-                .clickOnFindEventButton();
-        new EventsPage()
+                .assertUserLoggedIn()
+        .navigateTo(LandingPage.class)
+                .clickOnFindEventButton()
+        .navigateTo(EventsPage.class)
                 .openEventDetails()
                 .assertUpcomingEventDetails();
     }
@@ -44,13 +44,14 @@ public class EventTest extends BaseTest {
     public void addCommentToEventDetails() {
         new Header()
                 .login(admin)
-                .assertUserLoggedIn();
-        new LandingPage()
-                .clickOnFindEventButton();
-        new EventsPage()
-                .openEventDetails();
-        new EventDetailsPage()
+                .assertUserLoggedIn()
+        .navigateTo(LandingPage.class)
+                .clickOnFindEventButton()
+        .navigateTo(EventsPage.class)
+                .openEventDetails()
+        .navigateTo(EventDetailsPage.class)
                 .addCommentToEvent()
                 .assertAddedComment();
     }
+
 }

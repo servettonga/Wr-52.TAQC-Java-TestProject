@@ -1,10 +1,10 @@
 package net.eventsexpress.app.config;
 
 import java.net.URL;
-
 import org.apache.commons.configuration2.Configuration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.configuration2.ex.ConfigurationException;
+
 
 public class ConfigurationManager {
     protected static Configuration config;
@@ -21,4 +21,5 @@ public class ConfigurationManager {
         }
         return config;
     }
+
 }

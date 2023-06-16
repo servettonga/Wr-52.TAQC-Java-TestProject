@@ -2,25 +2,15 @@ package net.eventsexpress.app.pages.footerpages;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import io.qameta.allure.Step;
-import java.time.Duration;
-import net.eventsexpress.app.config.ConfigurationManager;
-import net.eventsexpress.app.driver.DriverManager;
+import net.eventsexpress.app.common.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class AboutPage {
-    private final int timeout = ConfigurationManager.getConfig().getInt("ELEMENT_TIMEOUT");
-    private final WebDriverWait wait =
-            new WebDriverWait(DriverManager.getDriver(), Duration.ofSeconds(timeout));
+public class AboutPage extends BasePage {
     protected static final String ABOUT_PAGE_HEADING_CSS = ".about h1";
 
-    public AboutPage() {
-        PageFactory.initElements(DriverManager.getDriver(), this);
-    }
 
     @FindBy(css = ABOUT_PAGE_HEADING_CSS)
     private WebElement aboutPageHeading;

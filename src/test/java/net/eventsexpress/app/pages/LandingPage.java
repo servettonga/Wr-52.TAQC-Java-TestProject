@@ -1,16 +1,14 @@
 package net.eventsexpress.app.pages;
 
+import io.qameta.allure.Step;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import io.qameta.allure.Step;
+import net.eventsexpress.app.common.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-import net.eventsexpress.app.driver.DriverManager;
 
-public class LandingPage {
+public class LandingPage extends BasePage {
     // Hero
     protected static final String CREATE_EVENT_BTN_XPATH =
             "//button[contains(text(), 'Create event')]";
@@ -30,9 +28,6 @@ public class LandingPage {
     @FindBy(xpath = FIND_EVENT_BTN_XPATH)
     private WebElement findEventButton;
 
-    public LandingPage() {
-        PageFactory.initElements(DriverManager.getDriver(), this);
-    }
 
     public String getBackgroundImage() {
         Pattern pattern = Pattern.compile("\\/([^\\/]+\\.jpg)");
@@ -49,6 +44,5 @@ public class LandingPage {
         findEventButton.click();
         return this;
     }
-
 
 }

@@ -1,5 +1,6 @@
 package net.eventsexpress.app.driver;
 
+import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 import com.google.common.collect.ImmutableMap;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.Dictionary;
@@ -17,8 +18,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
-
-import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
 
 public class DriverManager {
     private static WebDriver driver;
@@ -83,14 +82,14 @@ public class DriverManager {
         return driver.getCurrentUrl();
     }
 
-    public static void goToSite(String URL) {
+    public static void goToHomePage() {
         // Method for open site
         try {
             Set<String> tabs = driver.getWindowHandles();
             if (tabs.size() == 0) {
                 driver.switchTo().newWindow(WindowType.TAB);
             }
-            driver.get(URL);
+            driver.get(BASE_URL);
         }
         catch (TimeoutException e) {
             throw new RuntimeException("Site downloading failed, timeout");
