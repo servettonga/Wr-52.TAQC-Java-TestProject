@@ -1,12 +1,9 @@
 package net.eventsexpress.app.driver;
 
 import static com.github.automatedowl.tools.AllureEnvironmentWriter.allureEnvironmentWriter;
-import com.google.common.collect.ImmutableMap;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.Set;
-import net.eventsexpress.app.config.ConfigurationManager;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
@@ -18,6 +15,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
+import com.google.common.collect.ImmutableMap;
+import io.github.bonigarcia.wdm.WebDriverManager;
+import net.eventsexpress.app.config.ConfigurationManager;
 
 public class DriverManager {
     private static WebDriver driver;
@@ -29,7 +29,7 @@ public class DriverManager {
     public static WebDriver getDriver() {
         if (driver == null) {
             driver = createDriver();
-            writeEvironment();
+            writeEnvironment();
         }
         return driver;
     }
@@ -70,7 +70,6 @@ public class DriverManager {
     }
 
     public static void quit() {
-        // Method for quit driver
         if (driver != null) {
             driver.quit();
             driver = null;
@@ -78,12 +77,10 @@ public class DriverManager {
     }
 
     public static String getCurrentUrl() {
-        // Method for get current url
         return driver.getCurrentUrl();
     }
 
     public static void goToHomePage() {
-        // Method for open site
         try {
             Set<String> tabs = driver.getWindowHandles();
             if (tabs.size() == 0) {
@@ -104,7 +101,7 @@ public class DriverManager {
         return browser;
     }
 
-    private static void writeEvironment() {
+    private static void writeEnvironment() {
         Dictionary<String, String> browser = getBrowserInfo();
         allureEnvironmentWriter(ImmutableMap.<String, String>builder()
                 .put("Browser", browser.get("name"))

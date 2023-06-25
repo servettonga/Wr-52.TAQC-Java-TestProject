@@ -9,10 +9,10 @@ import org.testng.annotations.Test;
 
 public class RegisterTests extends BaseTest {
 
-    @Test(priority = 1)
+    @Test
     @Severity(SeverityLevel.CRITICAL)
-    @Description("User can register with valid data")
     @Story("Registration test with valid data")
+    @Description("Assert that user can register with valid data")
     public void validDataRegisters() {
         String expected = "Your register was successfull. Please confirm your email.";
         new Header()

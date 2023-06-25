@@ -11,74 +11,64 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 public class Header extends BasePage {
-    protected static final String EVENT_EXPRESS_LOGO_CSS = "#EEButton";
+
+    @FindBy(css = "#EEButton")
+    private WebElement eventExpressLogo;
+
     // Dropdown Menu
-    protected static final String DROPDOWN_MENU_XPATH = "//div[contains(@class, 'dropdown-menu')]";
-    protected static final String USER_AVATAR_XPATH = "//div[contains(@class, 'MuiAvatar')]";
-    protected static final String USERNAME_XPATH = "//p[@id='userNameAlign']";
-    protected static final String MY_PROFILE_XPATH = "//button[contains(text(), 'my profile')]";
-    protected static final String HELP_AND_FEEDBACK_XPATH = "//button[contains(text(), 'help and feedback')]";
-    protected static final String LOG_OUT_XPATH = "//button[contains(text(), 'log out')]";
-    // Login Modal
-    protected static final String SIGN_IN_UP_BTN_CSS = "#headbtn";
-    protected static final String LOGIN_TAB_XPATH = "(//button[@role='tab']//span[text()='Login'])[2]";
-    protected static final String REGISTER_TAB_XPATH = "(//button[@role='tab']//span[text()='Register'])[2]";
-    // Sign In
-    protected static final String EMAIL_INP_SIGNIN_XPATH = "(//span[ . = 'Sign In']/ancestor::form//input[@name='email'])[2]";
-    protected static final String PASSWORD_INP_SIGNIN_XPATH = "(//span[ . = 'Sign In']/ancestor::form//input[@name='password'])[2]";
-    protected static final String SIGN_IN_UP_BTN_XPATH = "(//div[@class='MuiDialog-root'][2]//span[@class='MuiButton-label'])[2]";
-    protected static final String INCORRECT_PASSWORD_AND_UNCONFIRMED_MSG_XPATH = "(//div[contains(@class, 'text-danger')])[1]";
-    // Sign Up
-    protected static final String EMAIL_INP_SIGNUP_XPATH = "(//span[ . = 'Sign Up']/ancestor::form//input[@name='email'])[1]";
-    protected static final String PASSWORD_INP_SIGNUP_XPATH = "(//span[ . = 'Sign Up']/ancestor::form//input[@name='password'])[1]";
-    protected static final String REPASSWORD_INP_SIGNUP_XPATH = "(//span[ . = 'Sign Up']/ancestor::form//input[@name='RepeatPassword'])[1]";
-    protected static final String SUCCESS_PAGE_ALERT_TEXT_CSS = "div.alert-success";
-    protected static final String UNSUCCESS_PAGE_ALERT_TEXT_XPATH = "//input[@name='password']/parent::*/following-sibling::p[contains(@class, 'Mui-error')]";
+    @FindBy(xpath = "//div[contains(@class, 'dropdown-menu')]")
+    private WebElement dropdownMenu;
 
-    @FindBy(css = SIGN_IN_UP_BTN_CSS)
-    private WebElement signInUpButton;
-
-    @FindBy(xpath = EMAIL_INP_SIGNIN_XPATH)
-    private WebElement emailInputSignIn;
-
-    @FindBy(xpath = EMAIL_INP_SIGNUP_XPATH)
-    private WebElement emailInputSignUp;
-
-    @FindBy(xpath = PASSWORD_INP_SIGNIN_XPATH)
-    private WebElement passwordInput;
-
-    @FindBy(xpath = PASSWORD_INP_SIGNUP_XPATH)
-    private WebElement passwordInputSignUp;
-
-    @FindBy(xpath = REPASSWORD_INP_SIGNUP_XPATH)
-    private WebElement repasswordInputSignUp;
-
-    @FindBy(xpath = SIGN_IN_UP_BTN_XPATH)
-    private WebElement signInUp;
-
-    @FindBy(xpath = INCORRECT_PASSWORD_AND_UNCONFIRMED_MSG_XPATH)
-    private WebElement incorretPasswordMessage;
-
-    @FindBy(xpath = INCORRECT_PASSWORD_AND_UNCONFIRMED_MSG_XPATH)
-    private WebElement loginWithoutConfirmEmail;
-
-    @FindBy(xpath = REGISTER_TAB_XPATH)
-    private WebElement registerTab;
-
-    @FindBy(css = SUCCESS_PAGE_ALERT_TEXT_CSS)
-    private WebElement successMessage;
-
-    @FindBy(xpath = USERNAME_XPATH)
-    private WebElement username;
-
-    @FindBy(xpath = USER_AVATAR_XPATH)
+    @FindBy(xpath = "//div[contains(@class, 'MuiAvatar')]")
     private WebElement userAvatar;
 
-    @FindBy(xpath = LOG_OUT_XPATH)
+    @FindBy(xpath = "//p[@id='userNameAlign']")
+    private WebElement username;
+
+    @FindBy(xpath = "//button[contains(text(), 'log out')]")
     private WebElement logOut;
 
-    @FindBy(xpath = DROPDOWN_MENU_XPATH)
-    private WebElement dropdownMenu;
+    @FindBy(xpath = "//button[contains(text(), 'my profile')]")
+    private WebElement myProfileButton;
+
+    @FindBy(xpath = "//button[contains(text(), 'help and feedback')]")
+    private WebElement helpAndFeedback;
+
+    // Login Modal
+    @FindBy(css = "#headbtn")
+    private WebElement signInUpButton;
+
+    @FindBy(xpath = "(//button[@role='tab']//span[text()='Login'])[2]")
+    private WebElement loginTab;
+
+    @FindBy(xpath = "(//button[@role='tab']//span[text()='Register'])[2]")
+    private WebElement registerTab;
+
+    // Sign In
+    @FindBy(xpath = "(//span[ . = 'Sign In']/ancestor::form//input[@name='email'])[2]")
+    private WebElement emailInputSignIn;
+
+    @FindBy(xpath = "(//span[ . = 'Sign In']/ancestor::form//input[@name='password'])[2]")
+    private WebElement passwordInput;
+
+    @FindBy(xpath = "(//div[@class='MuiDialog-root'][2]//span[@class='MuiButton-label'])[2]")
+    private WebElement signInUp;
+
+    @FindBy(xpath = "(//div[contains(@class, 'text-danger')])[1]")
+    private WebElement incorrectLoginMessage;
+
+    // Sign Up
+    @FindBy(xpath = "(//span[ . = 'Sign Up']/ancestor::form//input[@name='email'])[1]")
+    private WebElement emailInputSignUp;
+
+    @FindBy(xpath = "(//span[ . = 'Sign Up']/ancestor::form//input[@name='password'])[1]")
+    private WebElement passwordInputSignUp;
+
+    @FindBy(xpath = "(//span[ . = 'Sign Up']/ancestor::form//input[@name='RepeatPassword'])[1]")
+    private WebElement repasswordInputSignUp;
+
+    @FindBy(css = "div.alert-success")
+    private WebElement successMessage;
 
 
     @Step("Click on Sign In/Up button and login")
@@ -104,19 +94,19 @@ public class Header extends BasePage {
 
     @Step("Assert that user is not logged in")
     public Header assertIncorrectLogin() {
-        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(incorretPasswordMessage));
-        String currectMessage = errorMessage.getText();
+        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(incorrectLoginMessage));
+        String currentMessage = errorMessage.getText();
         String expectedIncorrectMessage = "Incorrect login or password";
         assertThat(errorMessage.isDisplayed())
                     .withFailMessage("Incorrect login message is not displayed").isTrue();
-        assertThat(currectMessage.contains(expectedIncorrectMessage) || currectMessage.contains("is not confirmed"))
+        assertThat(currentMessage.contains(expectedIncorrectMessage) || currentMessage.contains("is not confirmed"))
                     .withFailMessage("Unexpected incorrect login message").isTrue();
         return this;
     }
 
     @Step("Assert that error message is displayed")
     public void assertLoginWithoutConfirmation(String message) {
-        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(loginWithoutConfirmEmail));
+        WebElement errorMessage = wait.until(ExpectedConditions.visibilityOf(incorrectLoginMessage));
         assertThat(errorMessage.isDisplayed())
                     .withFailMessage("Element with message is not found").isTrue();
         assertThat(errorMessage.getText().contains(message)).withFailMessage("Error message is not correct").isTrue();

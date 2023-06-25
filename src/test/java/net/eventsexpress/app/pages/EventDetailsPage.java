@@ -1,49 +1,45 @@
 package net.eventsexpress.app.pages;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import io.qameta.allure.Step;
 import java.util.ArrayList;
 import java.util.List;
-import net.eventsexpress.app.common.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import io.qameta.allure.Step;
+import net.eventsexpress.app.common.BasePage;
 
 
 public class EventDetailsPage extends BasePage {
-    protected static final String EVENT_PHOTO_XPATH = "//img[contains(@id,'eventFullPhoto')]";
-    protected static final String EVENT_NAME_XPATH = "//span[@class='title']";
-    protected static final String EVENT_DATE_XPATH = "//time/..";
-    protected static final String EVENT_LOCATION_XPATH = "//div[@class='text-block']//div";
-    protected static final String EVENT_DESCRIPTION_XPATH = "//div[contains(@class, 'text-box-big')]";
-    protected static final String JOIN_BUTTON_XPATH = "//button[contains(@class, 'join-leave')]";
-    protected static final String COMMENT_TO_EVENT_XPATH = "//input[@name='text']";
-    protected static final String ADD_COMMENT_BUTTON = "//button[@value='Add']";
-    protected static final String ALL_COMMENTS = "//div[@class='comment-container']//p[2]";
-    protected static final String DELETE_LAST_COMMENT = "(//button[@aria-label='Delete'])[last()]";
 
-    @FindBy(xpath = EVENT_NAME_XPATH)
+    @FindBy(xpath = "//span[@class='title']")
     private WebElement eventName;
 
-    @FindBy(xpath = EVENT_DATE_XPATH)
+    @FindBy(xpath = "//time/..")
     private WebElement eventDate;
 
-    @FindBy(xpath = EVENT_LOCATION_XPATH)
+    @FindBy(xpath = "//div[@class='text-block']//div")
     private List<WebElement> eventLocation;
 
-    @FindBy(xpath = EVENT_DESCRIPTION_XPATH)
+    @FindBy(xpath = "//div[contains(@class, 'text-box-big')]")
     private WebElement eventDescription;
 
-    @FindBy(xpath = COMMENT_TO_EVENT_XPATH)
+    @FindBy(xpath = "//input[@name='text']")
     private WebElement commentFieldInput;
 
-    @FindBy(xpath = ADD_COMMENT_BUTTON)
+    @FindBy(xpath = "//img[contains(@id,'eventFullPhoto')]")
+    private WebElement eventPhoto;
+
+    @FindBy(xpath = "//button[contains(@class, 'join-leave')]")
+    private WebElement joinButton;
+
+    @FindBy(xpath = "//button[@value='Add']")
     private WebElement commentButton;
 
-    @FindBy(xpath = DELETE_LAST_COMMENT)
+    @FindBy(xpath = "(//button[@aria-label='Delete'])[last()]")
     private WebElement deleteLastComment;
 
-    @FindBy(xpath = ALL_COMMENTS)
+    @FindBy(xpath = "//div[@class='comment-container']//p[2]")
     private List<WebElement> allComments;
 
 
@@ -98,6 +94,16 @@ public class EventDetailsPage extends BasePage {
     public void deleteCreatedComment(){
         WebElement lastCommentDelete = wait.until(ExpectedConditions.visibilityOf(deleteLastComment));
         lastCommentDelete.click();
+    }
+
+    @Step("Click on join button")
+    public EventDetailsPage clickJoinButton() {
+        joinButton.click();
+        return this;
+    }
+
+    public String getEventPhoto() {
+        return eventPhoto.getAttribute("src");
     }
 
 }

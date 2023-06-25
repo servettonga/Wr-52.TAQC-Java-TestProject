@@ -11,8 +11,8 @@ public class LoginTests extends BaseTest {
 
     @Test(priority = 1)
     @Severity(SeverityLevel.BLOCKER)
-    @Description("A valid user can login to the application")
-    @Story("Valid username and password login test")
+    @Story("Valid username and password login")
+    @Description("Assert that a valid user can login to the application")
     public void validUserLogin() {
         new Header()
                 .login(admin)
@@ -21,8 +21,8 @@ public class LoginTests extends BaseTest {
 
     @Test(priority = 2)
     @Severity(SeverityLevel.BLOCKER)
-    @Description("An invalid user can not login to the application")
-    @Story("Invalid username and password login test")
+    @Story("Invalid username and password login")
+    @Description("Assert that an invalid user can not login to the application")
     public void invalidUserLoginFails() {
         new Header()
                 .login(invalidUser)
@@ -31,8 +31,8 @@ public class LoginTests extends BaseTest {
 
     @Test(priority = 3)
     @Severity(SeverityLevel.CRITICAL)
-    @Description("Registered User Try Login Without Confirming Email but he can't")
-    @Story("Unconfirmed user login test")
+    @Story("Unconfirmed user login")
+    @Description("Assert that unconfirmed user can not login to the application")
     public void registeredUserTryLoginWithoutConfirmingEmail() {
         String expected = unconfirmedUser.username() + " is not confirmed, please confirm";
         new Header()

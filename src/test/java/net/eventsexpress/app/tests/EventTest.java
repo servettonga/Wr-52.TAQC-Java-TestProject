@@ -12,44 +12,44 @@ import org.testng.annotations.Test;
 public class EventTest extends BaseTest {
 
     @Test(priority = 1)
-    @Description("Authorized user can open event page after click on Find event button")
-    @Story("Navigation to Event page test")
+    @Story("Navigation to Events Page")
+    @Description("Assert that authorized user can open event page after click on Find event button")
     public void verifyUpcomingEventsPage() {
         new Header()
-                .login(admin)
+                .login(regularUser)
                 .assertUserLoggedIn()
-        .navigateTo(LandingPage.class)
+                .navigateTo(LandingPage.class)
                 .clickOnFindEventButton()
-        .navigateTo(EventsPage.class)
+                .navigateTo(EventsPage.class)
                 .assertEventsPageOpened();
     }
 
     @Test(priority = 2)
-    @Description("Authorized user can open event details")
-    @Story("Verifying event details test")
+    @Story("Navigation to Events Page")
+    @Description("Assert that authorized user can open event details")
     public void verifyUpcomingEventDetails() {
         new Header()
                 .login(admin)
                 .assertUserLoggedIn()
-        .navigateTo(LandingPage.class)
+                .navigateTo(LandingPage.class)
                 .clickOnFindEventButton()
-        .navigateTo(EventsPage.class)
+                .navigateTo(EventsPage.class)
                 .openEventDetails()
                 .assertUpcomingEventDetails();
     }
 
     @Test(priority = 3)
-    @Description("Authorized user can add comment to the event")
-    @Story("Add comment to the event test")
+    @Story("Event Page details")
+    @Description("Assert that an authorized user can add comment to an event")
     public void addCommentToEventDetails() {
         new Header()
                 .login(admin)
                 .assertUserLoggedIn()
-        .navigateTo(LandingPage.class)
+                .navigateTo(LandingPage.class)
                 .clickOnFindEventButton()
-        .navigateTo(EventsPage.class)
+                .navigateTo(EventsPage.class)
                 .openEventDetails()
-        .navigateTo(EventDetailsPage.class)
+                .navigateTo(EventDetailsPage.class)
                 .addCommentToEvent()
                 .assertAddedComment();
     }

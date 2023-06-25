@@ -1,36 +1,37 @@
 package net.eventsexpress.app.pages;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import io.qameta.allure.Step;
 import net.eventsexpress.app.common.BasePage;
 import net.eventsexpress.app.pages.footerpages.AboutPage;
 import net.eventsexpress.app.pages.footerpages.PrivacyPage;
 import net.eventsexpress.app.pages.footerpages.TermsPage;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 
 public class Footer extends BasePage {
-    protected static final String FOOTER_XPATH = "//footer";
-    protected static final String PRIVACY_LINK_XPATH = "//footer//a[@href='/privacy']";
-    protected static final String TERMS_LINK_XPATH = "//footer//a[@href='/terms']";
-    protected static final String ABOUT_LINK_XPATH = "//footer//a[@href='/about']";
-    protected static final String CONTACT_LINK_XPATH = "//footer//a[@href='/contactAdmin']";
-    protected static final String FACEBOOK_LINK_XPATH =
-            "//i[contains(@class,'facebook')]/parent::*/@href";
-    protected static final String INSTAGRAM_LINK_XPATH =
-            "//i[contains(@class,'instagram')]/parent::*/@href";
-    protected static final String YOUTUBE_LINK_XPATH =
-            "//i[contains(@class,'youtube')]/parent::*/@href";
 
-    @FindBy(xpath = PRIVACY_LINK_XPATH)
+    @FindBy(xpath = "//footer//a[@href='/privacy']")
     private WebElement privacyPageLink;
 
-    @FindBy(xpath = ABOUT_LINK_XPATH)
+    @FindBy(xpath = "//footer//a[@href='/about']")
     private WebElement aboutPageLink;
 
-    @FindBy(xpath = TERMS_LINK_XPATH)
+    @FindBy(xpath = "//footer//a[@href='/terms']")
     private WebElement termsPageLink;
+
+    @FindBy(xpath = "//footer//a[@href='/contactAdmin']")
+    private WebElement contactPageLink;
+
+    @FindBy(xpath = "//i[contains(@class,'facebook')]/parent::*/@href")
+    private WebElement facebookPageLink;
+
+    @FindBy(xpath = "//i[contains(@class,'instagram')]/parent::*/@href")
+    private WebElement instagramPageLink;
+
+    @FindBy(xpath = "//i[contains(@class,'youtube')]/parent::*/@href")
+    private WebElement youtubePageLink;
 
 
     @Step("Click on Privacy link")

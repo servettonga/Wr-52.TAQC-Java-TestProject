@@ -16,7 +16,7 @@ public class Utils {
         Faker faker = new Faker();
         String email = faker.internet().emailAddress();
         String password = faker.internet().password();
-        User user = new User(email, password);
+        User user = new User(email, password, true);
         return user;
     }
 }

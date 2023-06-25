@@ -1,32 +1,35 @@
 package net.eventsexpress.app.pages;
 
-import io.qameta.allure.Step;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import net.eventsexpress.app.common.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import io.qameta.allure.Step;
+import net.eventsexpress.app.common.BasePage;
 
 
 public class LandingPage extends BasePage {
+
     // Hero
-    protected static final String CREATE_EVENT_BTN_XPATH =
-            "//button[contains(text(), 'Create event')]";
-    protected static final String FIND_EVENT_BTN_XPATH = "//a[text()='Find event']";
-    protected static final String JOIN_EVENTSEXPRESS_BTN_XPATH =
-            "//button[text()='Join EventsExpress']";
-    // Upcoming Events
-    protected static final String JOIN_EVENT_BTN_XPATH = "//a[text()='Join event']";
-    protected static final String EXPlORE_MORE_EVENTS_BTN_XPATH =
-            "//a[text()='Explore more events']";
-    // UI
-    protected static final String BACKGROUND_IMAGE_CSS = "article[style~='background-image:']";
+    @FindBy(xpath = "//button[contains(text(), 'Create event')]")
+    private WebElement createEventButton;
 
-    @FindBy(css = BACKGROUND_IMAGE_CSS)
-    private WebElement backgroundImage;
-
-    @FindBy(xpath = FIND_EVENT_BTN_XPATH)
+    @FindBy(xpath = "//a[text()='Find event']")
     private WebElement findEventButton;
+
+    @FindBy(xpath = "//button[text()='Join EventsExpress']")
+    private WebElement joinEventExpressButton;
+
+    // Upcoming Events
+    @FindBy(xpath = "//a[text()='Join event']")
+    private WebElement joinEventButton;
+
+    @FindBy(xpath = "//a[text()='Explore more events']")
+    private WebElement exploreMoreEventsButton;
+
+    // UI
+    @FindBy(css = "article[style~='background-image:']")
+    private WebElement backgroundImage;
 
 
     public String getBackgroundImage() {
